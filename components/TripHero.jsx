@@ -146,8 +146,9 @@ function TripHero(props) {
                 <p>{price}$</p>
               </div>
             </div>
+
             <div className="flex gap-2 flex-col md:flex-row bg-black w-full">
-              {!inWishlist && (
+              {props.user && !inWishlist && (
                 <button
                   type="button"
                   onClick={addToWishlist}
@@ -158,7 +159,7 @@ function TripHero(props) {
                 </button>
               )}
 
-              {inWishlist && (
+              {props.user && inWishlist && (
                 <button
                   type="button"
                   onClick={removeFromWishlist}
