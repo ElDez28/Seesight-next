@@ -9,17 +9,24 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar";
 import { useDispatch, useSelector } from "react-redux";
+import { useHttp } from "@/hooks/useHttp";
 import { navActions } from "@/store/store";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import Cookie from "js-cookie";
+
+import { userActions } from "@/store/store";
 function TripHero(props) {
+  const { error, isLoading, clearError, sendRequest } = useHttp();
+  const { wishlist } = useSelector((state) => state.user);
   const defaultValue = Date.now() + 24 * 60 * 60 * 1000;
   const [value, setValue] = useState(defaultValue);
-
+  const [inWishlist, setInWishlist] = useState(
+    wishlist.some((item) => item._id === props.id)
+  );
   const [secondValue, setSecondValue] = useState(
     Date.now() + 48 * 60 * 60 * 1000
   );
-
-  console.log(value, secondValue);
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
@@ -50,6 +57,33 @@ function TripHero(props) {
       dispatch(navActions.setBg("bg-black"));
     }
   }, [inView]);
+
+  useEffect(() => {
+    setInWishlist(wishlist.some((item) => item._id === props.id));
+  }, [wishlist.length]);
+
+  const addToWishlist = async () => {
+    try {
+      const { data } = await sendRequest(
+        "patch",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${props.id}/add`
+      );
+
+      dispatch(userActions.addItem(props.item));
+      Cookie.set("user", JSON.stringify(data));
+    } catch (err) {}
+  };
+  const removeFromWishlist = async () => {
+    try {
+      const { data } = await sendRequest(
+        "patch",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${props.id}/remove`
+      );
+
+      dispatch(userActions.removeItem(props.item._id));
+      Cookie.set("user", JSON.stringify(data));
+    } catch (err) {}
+  };
   return (
     <>
       <Navbar user={props.user} bg={bg}></Navbar>
@@ -113,12 +147,28 @@ function TripHero(props) {
               </div>
             </div>
             <div className="flex gap-2 flex-col md:flex-row bg-black w-full">
-              <button className="py-4 px-6 item  bg-orange-500 text-white font-bold ">
-                {props.user?.myWishlist.includes(props.id)
-                  ? "Remove from wishlist "
-                  : "Add to wishlist "}
-                <FavoriteBorderIcon></FavoriteBorderIcon>
-              </button>
+              {!inWishlist && (
+                <button
+                  type="button"
+                  onClick={addToWishlist}
+                  className="bg-orange-500 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
+                >
+                  Add to wishlist
+                  <FavoriteBorderIcon></FavoriteBorderIcon>
+                </button>
+              )}
+
+              {inWishlist && (
+                <button
+                  type="button"
+                  onClick={removeFromWishlist}
+                  className="bg-red-400 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
+                >
+                  Remove from wishlist
+                  <DeleteForeverIcon></DeleteForeverIcon>
+                </button>
+              )}
+
               <button className="py-4 px-6  item bg-green-500 text-white font-bold ">
                 Make Reservation
               </button>

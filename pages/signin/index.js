@@ -34,11 +34,13 @@ function SignIn() {
         formData
       );
 
-      Cookie.set("user", JSON.stringify(res.data.user));
       Cookie.set("expDate", Date.now() + 24 * 60 * 60 * 1000);
+      Cookie.set("user", JSON.stringify(res.data.user));
 
       router.replace("/");
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
   const signupFormSubmit = async (values) => {
     const formData = new FormData();
@@ -57,7 +59,7 @@ function SignIn() {
         formData,
         { "Content-Type": "multipart/form-data" }
       );
-      console.log(res);
+
       Cookie.set("user", JSON.stringify(res.data.user));
       Cookie.set("expDate", Date.now() + 24 * 60 * 60 * 1000);
 

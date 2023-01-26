@@ -33,6 +33,5 @@ export async function getServerSideProps({ req }) {
   );
   const data = await res.json();
   const user = req.cookies.user || null;
-
   return { props: { locations: data, user } };
 }

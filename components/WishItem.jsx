@@ -1,14 +1,25 @@
 import React from "react";
-
+import { useHttp } from "@/hooks/useHttp";
 import Link from "next/link";
+import Cookie from "js-cookie";
+import { userActions } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
 function WishItem(props) {
-  const coordinates = [
-    { lng: 18.4131, lat: 43.8563, name: "Sarajevo" },
-    { lng: 17.959, lat: 43.6536, name: "Konjic" },
-    { lng: 17.7604, lat: 43.6577, name: "Jablanica" },
-    { lng: 17.8078, lat: 43.3438, name: " Mostar" },
-  ];
-  const name = "Pocitelj";
+  const dispatch = useDispatch();
+  const { wishlist } = useSelector((state) => state.user);
+  console.log(wishlist);
+  const { isLoading, error, sendRequest, clearError } = useHttp();
+  const removeFromWishlist = async () => {
+    console.log("hello");
+    try {
+      const { data } = await sendRequest(
+        "patch",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${props.id}/remove`
+      );
+      dispatch(userActions.removeItem(props.id));
+      Cookie.set("user", JSON.stringify(data));
+    } catch (err) {}
+  };
   return (
     <div className="bg-white max-w-6xl  flex  gap-12  mx-auto  p-12 shadow-xl mb-12">
       <div className="flex font-rest gap-6 flex-col lg:flex-row  ">
@@ -18,8 +29,8 @@ function WishItem(props) {
             src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
           ></img>
           <Link
-            href={`/trips/${name}`}
-            className={`py-2 w-full bg-transparent border ${props.border} ${props.text} ${props.hover} hover:text-white transition-all duration-300 flex justify-center items-center`}
+            href={`/trips/${props.name}`}
+            className={`py-2 w-full bg-transparent border b-${props.theme}  hover:text-white transition-all duration-300 flex justify-center items-center`}
           >
             See more info
           </Link>
@@ -27,8 +38,14 @@ function WishItem(props) {
 
         <div className="itemTwo flex flex-col items-start justify-start gap-4">
           <div className="flex justify-between w-full">
-            <h3 className="text-3xl font-semibold text-gray-400 ">Jajce</h3>
-            <button type="button" className="text-white bg-red-600 px-4">
+            <h3 className="text-3xl font-semibold text-gray-400 ">
+              {props.name}
+            </h3>
+            <button
+              type="button"
+              onClick={removeFromWishlist}
+              className="text-white bg-red-600 px-4"
+            >
               Delete
             </button>
           </div>
@@ -42,7 +59,7 @@ function WishItem(props) {
               Trip route
             </p>
             <div className="hidden md:flex gap-2 w-full items-center justify-center px-4">
-              {coordinates.map((item, i) => {
+              {props.coordinates.map((item, i) => {
                 return (
                   <>
                     <div className="border-2  flex items-center justify-center border-black w-4 h-4 rounded-full text-gray-400 font-medium"></div>
@@ -53,14 +70,14 @@ function WishItem(props) {
               <div className="border-2  flex items-center justify-center border-orange-400 0 w-4 h-4 rounded-full"></div>
             </div>
             <div className="hidden md:flex justify-between w-full text-center text-gray-400 font-medium mb-6">
-              {coordinates.map((item, i) => {
+              {props.coordinates.map((item, i) => {
                 return (
                   <span key={i} className="text-center">
                     {item.name}
                   </span>
                 );
               })}
-              <span className="text-orange-400">{name}</span>
+              <span className="text-orange-400">{props.name}</span>
             </div>
             <div className="flex flex-col md:flex-row gap-4 justify-between items-center mt-2">
               <div className="flex flex-col mx-auto items-center">
@@ -68,7 +85,7 @@ function WishItem(props) {
                   Estimated travel time
                 </p>
                 <span className={`text-orange-400 font-bold text-2xl`}>
-                  2h 25min
+                  {props.duration}
                 </span>
               </div>
               <div className="flex flex-col mx-auto items-center">
@@ -76,7 +93,7 @@ function WishItem(props) {
                   Price per day
                 </p>
                 <span className={`text-orange-400 font-bold text-2xl`}>
-                  100 $
+                  {props.price} $
                 </span>
               </div>
 

@@ -27,14 +27,23 @@ const registerSlice = createSlice({
   },
 });
 const userSlice = createSlice({
-  name: "user",
+  name: "wishlist",
   initialState: {
-    user: null,
+    wishlist: [],
   },
 
   reducers: {
-    setUser(state, action) {
-      state.user = action.payload;
+    setWishlist(state, action) {
+      state.wishlist = action.payload;
+    },
+    removeItem(state, action) {
+      const newList = state.wishlist.filter(
+        (item) => item._id !== action.payload
+      );
+      state.wishlist = newList;
+    },
+    addItem(state, action) {
+      state.wishlist.push(action.payload);
     },
   },
 });
@@ -49,6 +58,7 @@ const profileSlice = createSlice({
     },
   },
 });
+
 const store = configureStore({
   reducer: {
     navbar: navSlice.reducer,

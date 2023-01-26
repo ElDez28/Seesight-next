@@ -2,11 +2,29 @@ import Gallery from "@/components/Gallery";
 import TripHero from "@/components/TripHero";
 import Location from "@/components/Location";
 import TripFooter from "@/components/TripFooter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "@/store/store";
+import { useHttp } from "@/hooks/useHttp";
 function Travel(props) {
+  const dispatch = useDispatch();
+  const { wishlist } = useSelector((state) => state.user);
   const [location, setLocation] = useState(props.location[0]);
+  const { error, sendRequest, isLoading, clearError } = useHttp();
   const user = JSON.parse(props.user);
-
+  useEffect(() => {
+    user.myWishlist.forEach(async (id) => {
+      const { data } = await sendRequest(
+        "get",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
+      );
+      if (wishlist.includes((item) => item._id === data.data._id)) {
+        return;
+      } else {
+        dispatch(userActions.addItem(data.data));
+      }
+    });
+  }, []);
   const coordinates = location.locations.map((item) => {
     return {
       lng: item.coordinates[0],
@@ -22,6 +40,7 @@ function Travel(props) {
         desc={location.desc}
         id={location._id}
         user={user}
+        item={location}
       ></TripHero>
       <Gallery images={location.images}></Gallery>
       <Location

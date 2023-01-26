@@ -54,6 +54,56 @@ body {
 .theme-5 {
   background: linear-gradient(90deg, #fb923c, #d97706);
 }
+
+.b-0 {
+  color: #4ade80;
+  border: 1px solid #4ade80;
+}
+.b-0:hover {
+  background-color: #4ade80;
+  color: white;
+}
+.b-1 {
+  color: #facc15;
+  border: 1px solid #facc15;
+}
+.b-1:hover {
+  background-color: #facc15;
+  color: white;
+}
+.b-2 {
+  color: #a78bfa;
+  border: 1px solid #a78bfa;
+}
+.b-2:hover {
+  background-color: #a78bfa;
+  color: white;
+}
+.b-3 {
+  color: #60a5fa;
+  border: 1px solid #60a5fa;
+}
+.b-3:hover {
+  background-color: #60a5fa;
+  color: white;
+}
+.b-4 {
+  color: #f87171;
+  border: 1px solid #f87171;
+}
+.b-4:hover {
+  background-color: #f87171;
+  color: white;
+}
+.b-5 {
+  color: #fb923c;
+  border: 1px solid #fb923c;
+}
+.b-5:hover {
+  background-color: #fb923c;
+  color: white;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
