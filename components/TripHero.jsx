@@ -21,9 +21,7 @@ function TripHero(props) {
   const { wishlist } = useSelector((state) => state.user);
   const defaultValue = Date.now() + 24 * 60 * 60 * 1000;
   const [value, setValue] = useState(defaultValue);
-  const [inWishlist, setInWishlist] = useState(
-    wishlist.some((item) => item._id === props.id)
-  );
+  const [inWishlist, setInWishlist] = useState(false);
   const [secondValue, setSecondValue] = useState(
     Date.now() + 48 * 60 * 60 * 1000
   );
@@ -59,7 +57,9 @@ function TripHero(props) {
   }, [inView]);
 
   useEffect(() => {
-    setInWishlist(wishlist.some((item) => item._id === props.id));
+    if (wishlist.length > 0) {
+      setInWishlist(wishlist.some((item) => item._id === props.id));
+    }
   }, [wishlist.length]);
 
   const addToWishlist = async () => {

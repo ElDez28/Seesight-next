@@ -13,17 +13,19 @@ function Travel(props) {
   const { error, sendRequest, isLoading, clearError } = useHttp();
   const user = JSON.parse(props.user);
   useEffect(() => {
-    user.myWishlist.forEach(async (id) => {
-      const { data } = await sendRequest(
-        "get",
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
-      );
-      if (wishlist.some((item) => item._id === data.data._id)) {
-        return;
-      } else {
-        dispatch(userActions.addItem(data.data));
-      }
-    });
+    if (user) {
+      user.myWishlist.forEach(async (id) => {
+        const { data } = await sendRequest(
+          "get",
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
+        );
+        if (wishlist.some((item) => item._id === data.data._id)) {
+          return;
+        } else {
+          dispatch(userActions.addItem(data.data));
+        }
+      });
+    }
   }, []);
   const coordinates = location.locations.map((item) => {
     return {

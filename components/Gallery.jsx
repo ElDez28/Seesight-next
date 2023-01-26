@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
 function Gallery(props) {
   const [featuredImg, setFeaturedImg] = useState(0);
@@ -11,6 +12,8 @@ function Gallery(props) {
             className=" w-full object-cover h-full cursor-pointer"
             src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.images[featuredImg]}.png`}
             alt=""
+            height="100"
+            width="100"
           ></img>
         </div>
         <div className="item grid grid-cols-2 gap-2 ">
