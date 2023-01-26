@@ -6,7 +6,7 @@ import { useState } from "react";
 function Travel(props) {
   const [location, setLocation] = useState(props.location[0]);
   const user = JSON.parse(props.user);
-  console.log(location);
+
   const coordinates = location.locations.map((item) => {
     return {
       lng: item.coordinates[0],
@@ -60,15 +60,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-// export async function getStaticPaths() {
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tours`);
-//   const { data } = await res.json();
-
-//   const titles = data.map((item) => item.title);
-//   const params = titles.map((title) => ({ params: { title } }));
-//   return {
-//     paths: params,
-//     fallback: false,
-//   };
-// }
 export default Travel;

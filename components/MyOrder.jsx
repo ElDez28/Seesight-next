@@ -26,19 +26,14 @@ function MyOrder(props) {
       year: "numeric",
     }
   );
-  // temporary
-  const regex = /([^\/]+$)/;
-  const regex1 = /{(?:[^,}]*,){0}/;
-  const img = props.order.trip.imageCover.match(regex);
 
-  console.log(img[1]);
   return (
     <div className="bg-white max-w-6xl  flex  gap-12  mx-auto mt-20 p-12 shadow-xl mb-12">
       <div className="flex font-rest gap-6 flex-col lg:flex-row  ">
         <div className={`item flex  items-center p-0`}>
           <img
             className=" w-full h-full object-cover "
-            src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${img[1]}`}
+            src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.order.trip.imageCover}`}
           ></img>
         </div>
 
