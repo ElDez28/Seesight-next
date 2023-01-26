@@ -15,7 +15,7 @@ function MyTrips(props) {
     <>
       <AccHeader desc="trips" user={props.user}></AccHeader>
       <div className="mt-20">
-        <MyTrip></MyTrip>
+        <MyTrip image="mostar3.png"></MyTrip>
       </div>
     </>
   );

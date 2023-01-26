@@ -6,7 +6,10 @@ function MyTrip(props) {
       <form>
         <div className="flex flex-col md:flex-row gap-12 text-gray-500 font-medium font-rest mb-8">
           <div className="item">
-            <img src="/images/mostar2.png" alt=""></img>
+            <img
+              src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
+              alt=""
+            ></img>
           </div>
           <div className="item flex flex-col items-center justify-center gap-12">
             <div>

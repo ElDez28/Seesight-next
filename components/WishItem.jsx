@@ -15,7 +15,7 @@ function WishItem(props) {
         <div className="item flex flex-col items-center justify-between">
           <img
             className="object-cover h-full pb-4"
-            src="/images/jajce.png"
+            src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
           ></img>
           <Link
             href={`/trips/${name}`}

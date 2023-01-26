@@ -11,6 +11,7 @@ function Wishlist(props) {
           border="border-[#3c096c]"
           text="text-[#3c096c]"
           hover="hover:bg-[#3c096c]"
+          image="jajce.png"
         ></WishItem>
       </div>
     </>
