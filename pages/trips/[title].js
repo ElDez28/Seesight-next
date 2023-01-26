@@ -18,7 +18,7 @@ function Travel(props) {
         "get",
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
       );
-      if (wishlist.includes((item) => item._id === data.data._id)) {
+      if (wishlist.some((item) => item._id === data.data._id)) {
         return;
       } else {
         dispatch(userActions.addItem(data.data));
