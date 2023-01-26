@@ -7,7 +7,11 @@ function Card(props) {
   return (
     <div className="w-full mx-auto  font-rest shadow-lg  ">
       <div className="w-full relative ">
-        <img className="w-full" src={props.image} alt=""></img>
+        <img
+          className="w-full"
+          src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
+          alt=""
+        ></img>
         <div
           className={`theme-${props.theme} w-10 h-10 text-white   p-2 rounded-full text-center absolute flex items-center justify-center
           -bottom-4 right-2 `}

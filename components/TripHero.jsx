@@ -18,6 +18,8 @@ function TripHero(props) {
   const [secondValue, setSecondValue] = useState(
     Date.now() + 48 * 60 * 60 * 1000
   );
+
+  console.log(value, secondValue);
   const [price, setPrice] = useState(0);
 
   useEffect(() => {

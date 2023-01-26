@@ -77,6 +77,17 @@ function Sidebar(props) {
               props.page === 4 && "border-orange-400"
             }`}
           >
+            My Orders
+          </li>
+          <li
+            onClick={() => {
+              setHide(false);
+              dispatch(profileActions.setPage(5));
+            }}
+            className={`cursor-pointer border-b-2 ${
+              props.page === 5 && "border-orange-400"
+            }`}
+          >
             My Complaints
           </li>
         </ul>

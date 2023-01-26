@@ -7,6 +7,7 @@ import Wishlist from "./Wishlist";
 import Complaint from "./Complaint";
 import { useDispatch, useSelector } from "react-redux";
 import { profileActions } from "@/store/store";
+import MyOrders from "./MyOrders";
 function Profile(props) {
   const page = useSelector((state) => state.profile.page);
 
@@ -21,7 +22,10 @@ function Profile(props) {
         {page === 1 && <Account user={props.user}></Account>}
         {page === 2 && <MyTrips user={props.user}></MyTrips>}
         {page === 3 && <Wishlist user={props.user}></Wishlist>}
-        {page === 4 && <Complaint user={props.user}></Complaint>}
+        {page === 4 && (
+          <MyOrders orders={props.orders} user={props.user}></MyOrders>
+        )}
+        {page === 5 && <Complaint user={props.user}></Complaint>}
       </div>
     </div>
   );

@@ -1,9 +1,4 @@
 import React from "react";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Trip from "./Trip";
-import { profileActions } from "@/store/store";
-import { useDispatch } from "react-redux";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import Cookie from "js-cookie";
 import { useFormik } from "formik";
@@ -12,7 +7,6 @@ import updateSchema from "../schemas/updateSchema";
 import AccHeader from "./AccHeader";
 function Account(props) {
   const { error, isLoading, clearError, sendRequest } = useHttp();
-  const dispatch = useDispatch();
   const user = props.user;
   const initialValues = {
     username: user.username,
