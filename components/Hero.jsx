@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar";
@@ -24,9 +24,16 @@ function Hero(props) {
       className=" min-h-screen bg-gradient-to-t from-[#d1d6db] to-[#415a77]"
     >
       <Navbar user={props.user} bg={bg}></Navbar>
-      <div className="h-screen bg-[url('https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&w=1600')] bg-cover flex justify-center items-center flex-col">
-        <div className="absolute bg-black opacity-60  w-full h-full "></div>
-        <div className="bg-black py-16 px-10  rounded-2xl font-rest z-10 flex-col text-white text-center max-w-3xl">
+      <div className="h-screen  bg-cover flex justify-center items-center flex-col">
+        <div className="absolute h-full">
+          <img
+            className=" w-screen h-full object-fit"
+            src="/images/hero.jpeg"
+            alt=""
+          ></img>
+        </div>
+        <div className="absolute bg-black opacity-60  w-full h-full z-10 "></div>
+        <div className="bg-black py-16 px-10  rounded-2xl font-rest z-20 flex-col text-white text-center max-w-3xl">
           <h1 className="text-white text-5xl  font-bold mb-6">
             Most beautifle locations in Bosnia
           </h1>

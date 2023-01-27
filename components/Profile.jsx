@@ -17,7 +17,7 @@ function Profile(props) {
       <div className="flex-1 pt-10 px-10 relative flex flex-col items-center">
         <img
           className="absolute -z-10 min-w-screen min-h-screen object-cover "
-          src="/images/cover2.png"
+          src="/images/cover2.jpg"
         ></img>
         {page === 1 && <Account user={props.user}></Account>}
         {page === 2 && <MyTrips user={props.user}></MyTrips>}

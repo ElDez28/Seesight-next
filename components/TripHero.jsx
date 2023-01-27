@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -88,9 +88,10 @@ function TripHero(props) {
       <Navbar user={props.user} bg={bg}></Navbar>
       <header ref={ref} className="flex items-center font-rest ">
         <div className="w-full flex items-center justify-center min-h-[90vh] overflow-hidden relative">
+          <div className="absolute w-full h-full bg-black bg-opacity-70"></div>
           <img
             className="absolute  h-full w-full object-cover -z-10"
-            src="/images/pocitelj2.png"
+            src="/images/tripHero1.jpg"
             alt=""
           ></img>
           <div className="bg-black px-12 py-8  max-w-6xl  rounded-2xl z-10 text-white text-center mx-4 md:mx-auto -mt-14">
