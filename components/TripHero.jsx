@@ -16,6 +16,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Cookie from "js-cookie";
 
 import { userActions } from "@/store/store";
+
 function TripHero(props) {
   const { error, isLoading, clearError, sendRequest } = useHttp();
   const { wishlist } = useSelector((state) => state.user);
@@ -26,7 +27,7 @@ function TripHero(props) {
     Date.now() + 48 * 60 * 60 * 1000
   );
   const [price, setPrice] = useState(0);
-
+  console.log(inWishlist);
   useEffect(() => {
     if (secondValue - value > 0) {
       setPrice(
@@ -57,9 +58,7 @@ function TripHero(props) {
   }, [inView]);
 
   useEffect(() => {
-    if (wishlist.length > 0) {
-      setInWishlist(wishlist.some((item) => item._id === props.id));
-    }
+    setInWishlist(wishlist.some((item) => item._id === props.id));
   }, [wishlist.length]);
 
   const addToWishlist = async () => {
@@ -154,8 +153,14 @@ function TripHero(props) {
                   onClick={addToWishlist}
                   className="bg-orange-500 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
                 >
-                  Add to wishlist
-                  <FavoriteBorderIcon></FavoriteBorderIcon>
+                  {isLoading ? (
+                    <span class="loader"></span>
+                  ) : (
+                    <>
+                      Add to wishlist
+                      <FavoriteBorderIcon></FavoriteBorderIcon>
+                    </>
+                  )}
                 </button>
               )}
 
@@ -165,8 +170,15 @@ function TripHero(props) {
                   onClick={removeFromWishlist}
                   className="bg-red-400 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
                 >
-                  Remove from wishlist
-                  <DeleteForeverIcon></DeleteForeverIcon>
+                  {isLoading ? (
+                    <span class="loader"></span>
+                  ) : (
+                    <>
+                      {" "}
+                      Remove from wishlist
+                      <DeleteForeverIcon></DeleteForeverIcon>
+                    </>
+                  )}
                 </button>
               )}
 
