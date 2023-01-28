@@ -77,7 +77,7 @@ function Sidebar(props) {
               props.page === 4 && "border-orange-400"
             }`}
           >
-            My Orders
+            My Reservations
           </li>
           <li
             onClick={() => {

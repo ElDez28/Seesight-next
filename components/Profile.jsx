@@ -10,6 +10,7 @@ import { profileActions } from "@/store/store";
 import MyOrders from "./MyOrders";
 function Profile(props) {
   const page = useSelector((state) => state.profile.page);
+  const [orders, setOrders] = useState(props.orders);
 
   return (
     <div className="flex font-rest">
@@ -25,7 +26,11 @@ function Profile(props) {
           <Wishlist wishlist={props.wishlist} user={props.user}></Wishlist>
         )}
         {page === 4 && (
-          <MyOrders orders={props.orders} user={props.user}></MyOrders>
+          <MyOrders
+            setOrders={setOrders}
+            orders={orders}
+            user={props.user}
+          ></MyOrders>
         )}
         {page === 5 && <Complaint user={props.user}></Complaint>}
       </div>

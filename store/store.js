@@ -58,6 +58,22 @@ const profileSlice = createSlice({
     },
   },
 });
+const orderSlice = createSlice({
+  name: "order",
+  initialState: {
+    defaultValue: Date.now() + 24 * 60 * 60 * 1000,
+    firstDate: Date.now() + 24 * 60 * 60 * 1000,
+    secondDate: Date.now() + 48 * 60 * 60 * 1000,
+  },
+  reducers: {
+    setFirstDate(state, action) {
+      state.firstDate = action.payload;
+    },
+    setSecondDate(state, action) {
+      state.secondDate = action.payload;
+    },
+  },
+});
 
 const store = configureStore({
   reducer: {
@@ -65,6 +81,7 @@ const store = configureStore({
     register: registerSlice.reducer,
     user: userSlice.reducer,
     profile: profileSlice.reducer,
+    order: orderSlice.reducer,
   },
 });
 
@@ -72,4 +89,5 @@ export const navActions = navSlice.actions;
 export const registerActions = registerSlice.actions;
 export const userActions = userSlice.actions;
 export const profileActions = profileSlice.actions;
+export const orderActions = orderSlice.actions;
 export default store;

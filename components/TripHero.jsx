@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -10,7 +9,7 @@ import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { useHttp } from "@/hooks/useHttp";
-import { navActions } from "@/store/store";
+import { navActions, orderActions } from "@/store/store";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Cookie from "js-cookie";
@@ -20,29 +19,24 @@ import { userActions } from "@/store/store";
 function TripHero(props) {
   const { error, isLoading, clearError, sendRequest } = useHttp();
   const { wishlist } = useSelector((state) => state.user);
-  const defaultValue = Date.now() + 24 * 60 * 60 * 1000;
-  const [value, setValue] = useState(defaultValue);
+
   const [inWishlist, setInWishlist] = useState(false);
-  const [secondValue, setSecondValue] = useState(
-    Date.now() + 48 * 60 * 60 * 1000
-  );
+
   const [price, setPrice] = useState(0);
-  console.log(inWishlist);
+  const order = useSelector((state) => state.order);
+
   useEffect(() => {
-    if (secondValue - value > 0) {
+    if (order.secondDate - order.firstDate > 0) {
       setPrice(
-        Math.round(((secondValue - value) / 24 / 60 / 60 / 1000) * props.price)
+        Math.ceil(
+          ((order.secondDate - order.firstDate) / 24 / 60 / 60 / 1000) *
+            props.price
+        )
       );
     } else {
       setPrice(0);
     }
-  }, [value, secondValue]);
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-  const handleSecondInputChange = (newValue) => {
-    setSecondValue(newValue);
-  };
+  }, [order.firstDate, order.secondDate]);
 
   const dispatch = useDispatch();
   const bg = useSelector((state) => state.navbar.bg);
@@ -56,7 +50,12 @@ function TripHero(props) {
       dispatch(navActions.setBg("bg-black"));
     }
   }, [inView]);
-
+  const handleFirstDateChange = (newValue) => {
+    dispatch(orderActions.setFirstDate(newValue));
+  };
+  const handleSecondDateChange = (newValue) => {
+    dispatch(orderActions.setSecondDate(newValue));
+  };
   useEffect(() => {
     setInWishlist(wishlist.some((item) => item._id === props.id));
   }, [wishlist.length]);
@@ -117,12 +116,12 @@ function TripHero(props) {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Stack className="" spacing={3}>
                   <DesktopDatePicker
-                    minDate={defaultValue}
+                    minDate={order.defaultValue}
                     className="bg-white "
                     inputFormat="MM/DD/YYYY"
                     label="Starting date"
-                    value={value}
-                    onChange={handleChange}
+                    value={order.firstDate}
+                    onChange={handleFirstDateChange}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
@@ -130,12 +129,12 @@ function TripHero(props) {
               <LocalizationProvider className="item" dateAdapter={AdapterDayjs}>
                 <Stack spacing={3}>
                   <DesktopDatePicker
-                    minDate={value + 24 * 60 * 60 * 1000}
+                    minDate={order.defaultValue + 24 * 60 * 60 * 1000}
                     className="bg-white "
                     inputFormat="MM/DD/YYYY"
                     label="Return date"
-                    value={secondValue}
-                    onChange={handleSecondInputChange}
+                    value={order.secondDate}
+                    onChange={handleSecondDateChange}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
@@ -183,7 +182,11 @@ function TripHero(props) {
                 </button>
               )}
 
-              <button className="py-4 px-6  item bg-green-500 text-white font-bold ">
+              <button
+                type="button"
+                onClick={() => props.setOpen(true)}
+                className="py-4 px-6  item bg-green-500 text-white font-bold "
+              >
                 Make Reservation
               </button>
             </div>

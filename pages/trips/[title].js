@@ -6,12 +6,15 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "@/store/store";
 import { useHttp } from "@/hooks/useHttp";
+import Modal from "@/components/Modal";
 function Travel(props) {
   const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.user);
   const [location, setLocation] = useState(props.location[0]);
   const { error, sendRequest, isLoading, clearError } = useHttp();
+  const [isOpen, setIsOpen] = useState(false);
   const user = JSON.parse(props.user);
+
   useEffect(() => {
     if (user) {
       user.myWishlist.forEach(async (id) => {
@@ -36,6 +39,14 @@ function Travel(props) {
   });
   return (
     <>
+      {isOpen && (
+        <Modal
+          location={location}
+          setOpen={setIsOpen}
+          open={isOpen}
+          price={location.price}
+        ></Modal>
+      )}
       <TripHero
         price={location.price}
         title={location.title}
@@ -43,6 +54,7 @@ function Travel(props) {
         id={location._id}
         user={user}
         item={location}
+        setOpen={setIsOpen}
       ></TripHero>
       <Gallery images={location.images}></Gallery>
       <Location

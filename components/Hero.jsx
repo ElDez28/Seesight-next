@@ -27,13 +27,13 @@ function Hero(props) {
       <div className="h-screen  bg-cover flex justify-center items-center flex-col">
         <div className="absolute h-full">
           <img
-            className=" w-screen h-full object-fit"
+            className=" w-screen h-full object-fit -z-10"
             src="/images/hero.jpeg"
             alt=""
           ></img>
         </div>
-        <div className="absolute bg-black opacity-60  w-full h-full z-10 "></div>
-        <div className="bg-black py-16 px-10  rounded-2xl font-rest z-20 flex-col text-white text-center max-w-3xl">
+        <div className="absolute bg-black opacity-60  w-full h-full  "></div>
+        <div className="bg-black py-16 px-10  rounded-2xl font-rest z-10 flex-col text-white text-center max-w-3xl">
           <h1 className="text-white text-5xl  font-bold mb-6">
             Most beautifle locations in Bosnia
           </h1>
@@ -49,7 +49,7 @@ function Hero(props) {
             Learn more
           </Link>
         </div>
-        <h2 className=" z-10 font-logo text-6xl text-orange-600 -skew-y-6">
+        <h2 className=" z-20 font-logo text-6xl text-orange-600 -skew-y-6">
           Seesight Travel
         </h2>
       </div>

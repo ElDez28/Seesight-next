@@ -15,7 +15,7 @@ function Navbar(props) {
 
   return (
     <nav
-      className={`navbar z-50 w-full px-6 py-4 flex justify-between items-center  fixed ${props.bg} transition-all duration-600 ease-in font-rest`}
+      className={`navbar z-30 w-full px-6 py-4 flex justify-between items-center  fixed ${props.bg} transition-all duration-600 ease-in font-rest`}
     >
       <Link href={"/"}>
         <Image width={36} height={36} src="/images/4153548.png" alt=""></Image>
@@ -49,11 +49,11 @@ function Navbar(props) {
             My profile
           </Link>
           <Link
-            onClick={() => dispatch(profileActions.setPage(2))}
+            onClick={() => dispatch(profileActions.setPage(4))}
             href="/users/me"
             className="text-white border-b transition-all duration-100 flex items-center justify-center"
           >
-            My orders
+            My reservations
           </Link>
           <Link
             onClick={() => dispatch(profileActions.setPage(3))}
