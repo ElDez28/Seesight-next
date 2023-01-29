@@ -171,7 +171,7 @@ function TripHero(props) {
                   className="bg-red-400 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
                 >
                   {isLoading ? (
-                    <span class="loader"></span>
+                    <span className="loader"></span>
                   ) : (
                     <>
                       {" "}

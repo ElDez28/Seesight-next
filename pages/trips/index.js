@@ -50,10 +50,25 @@ function Index(props) {
   );
 }
 export async function getServerSideProps({ req }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tours`);
-  const data = await res.json();
-  const user = req.cookies.user || null;
+  const responseOne = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours`
+  );
+  const data = await responseOne.json();
 
-  return { props: { locations: data, user: user } };
+  const userId = req.cookies.userId;
+  if (userId === null) {
+    return {
+      props: {
+        locations: data,
+      },
+    };
+  }
+  const responseTwo = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
+  );
+  const parsedRes = await responseTwo.json();
+  const user = parsedRes.data;
+
+  return { props: { locations: data, user } };
 }
 export default Index;

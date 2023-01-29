@@ -21,7 +21,9 @@ function Profile(props) {
           src="/images/cover2.jpg"
         ></img>
         {page === 1 && <Account user={props.user}></Account>}
-        {page === 2 && <MyTrips user={props.user}></MyTrips>}
+        {page === 2 && (
+          <MyTrips orders={props.orders} user={props.user}></MyTrips>
+        )}
         {page === 3 && (
           <Wishlist wishlist={props.wishlist} user={props.user}></Wishlist>
         )}

@@ -3,8 +3,9 @@ import Hero from "../components/Hero";
 import List from "@/components/List";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";
+
 export default function HomePage(props) {
-  const user = JSON.parse(props.user);
+  const user = props.user;
 
   return (
     <>
@@ -32,6 +33,21 @@ export async function getServerSideProps({ req }) {
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours?isFeatured=true`
   );
   const data = await res.json();
-  const user = req.cookies.user || null;
-  return { props: { locations: data, user } };
+  const userId = req.cookies.userId;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
+  );
+  const userData = await response.json();
+  const user = userData.data;
+
+  if (!user) {
+    return {
+      props: {
+        locations: data,
+        user: null,
+      },
+    };
+  } else {
+    return { props: { locations: data, user } };
+  }
 }

@@ -45,7 +45,7 @@ function MyOrder(props) {
     } catch (err) {}
   };
   return (
-    <div className="bg-white max-w-6xl  flex  gap-12  mx-auto mt-20 p-12 shadow-xl ">
+    <div className="bg-white max-w-6xl  flex  gap-12  mx-auto mt-10 p-12 shadow-xl ">
       <div className="flex font-rest gap-6 flex-col lg:flex-row  ">
         <div className={`item flex  items-center p-0`}>
           <img
@@ -112,9 +112,7 @@ function MyOrder(props) {
               }`}
             >
               <span className="text-sm ">Pending</span>
-              <PendingActionsIcon
-                className={`w-12 h-12  `}
-              ></PendingActionsIcon>
+              <PendingActionsIcon className={`w-12 h-12 `}></PendingActionsIcon>
             </div>
             <div
               className={`flex flex-col items-center justify-center ${

@@ -4,13 +4,12 @@ import { useHttp } from "@/hooks/useHttp";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "@/store/store";
 const MyProfile = (props) => {
-  const user = JSON.parse(props.user);
   const dispatch = useDispatch();
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const { wishlist } = useSelector((state) => state.user);
 
   useEffect(() => {
-    user.myWishlist.forEach(async (id) => {
+    props.user.myWishlist.forEach(async (id) => {
       const { data } = await sendRequest(
         "get",
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
@@ -24,15 +23,18 @@ const MyProfile = (props) => {
   }, []);
 
   return (
-    <Profile wishlist={wishlist} orders={props.orders} user={user}></Profile>
+    <Profile
+      wishlist={wishlist}
+      orders={props.orders}
+      user={props.user}
+    ></Profile>
   );
 };
 
 export default MyProfile;
-export async function getServerSideProps({ req, res }) {
-  const user = req.cookies.user || null;
-  const expDate = req.cookies.expDate || null;
-  if (user === null) {
+export async function getServerSideProps({ req }) {
+  const userId = req.cookies.userId || null;
+  if (userId === null) {
     return {
       redirect: {
         permanent: true,
@@ -40,18 +42,29 @@ export async function getServerSideProps({ req, res }) {
       },
     };
   }
-  const parsedUser = JSON.parse(user);
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/orders?user=${parsedUser.id}`
+
+  const responseOne = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
+  );
+  const parsedRes = await responseOne.json();
+  const user = parsedRes.data;
+  const responseTwo = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/orders?user=${userId}`
   );
 
-  const { data } = await response.json();
-  if (!data) {
+  const { data } = await responseTwo.json();
+  if (!user) {
     return {
-      props: { user, expDate },
+      props: {
+        user: null,
+      },
+    };
+  } else if (!data) {
+    return {
+      props: { user },
     };
   }
   return {
-    props: { user, expDate, orders: data },
+    props: { user, orders: data },
   };
 }

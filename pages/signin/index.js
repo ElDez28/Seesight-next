@@ -35,7 +35,7 @@ function SignIn() {
       );
 
       Cookie.set("expDate", Date.now() + 24 * 60 * 60 * 1000);
-      Cookie.set("user", JSON.stringify(res.data.user));
+      Cookie.set("userId", res.data.user._id);
 
       router.replace("/");
     } catch (err) {
@@ -60,7 +60,7 @@ function SignIn() {
         { "Content-Type": "multipart/form-data" }
       );
 
-      Cookie.set("user", JSON.stringify(res.data.user));
+      Cookie.set("user", res.data.user._id);
       Cookie.set("expDate", Date.now() + 24 * 60 * 60 * 1000);
 
       router.replace("/");

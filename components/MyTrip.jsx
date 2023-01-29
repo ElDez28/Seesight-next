@@ -1,6 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Rating from "./Rating";
+import { useHttp } from "@/hooks/useHttp";
+import { useRef } from "react";
 function MyTrip(props) {
+  const { sendRequest, error, clearError, isLoading } = useHttp();
+  const startingDate = new Date(props.startingDate).toLocaleString("default", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const endingDate = new Date(props.endingDate).toLocaleString("default", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const reviewRef = useRef();
+  const review = props.reviews.find((review) => review.trip[0] === props.id);
+  const rating = review ? review.rating : 0;
+  const [value, setValue] = React.useState(rating);
+
+  const submitReview = async (e) => {
+    e.preventDefault();
+    const data = {
+      text: reviewRef.current.value,
+      trip: props.id,
+      rating: value,
+    };
+    if (!review) {
+      try {
+        await sendRequest(
+          "post",
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/reviews`,
+          data
+        );
+      } catch (err) {}
+    } else {
+      try {
+        const res = await sendRequest(
+          "patch",
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/reviews/${review._id}`,
+          data
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+  console.log(error);
+
   return (
     <div className="bg-white max-w-6xl  flex flex-col gap-12  mx-auto  p-12 shadow-xl ">
       <form>
@@ -18,19 +65,19 @@ function MyTrip(props) {
             <div className="flex gap-12 border-b-2 py-4">
               <div>
                 <h2 className="">Starting Date</h2>
-                <span>{props.startingDate}</span>
+                <span>{startingDate}</span>
               </div>
               <div>
                 <h2 className="">Ending Date</h2>
-                <span>{props.endingDate}</span>
+                <span>{endingDate}</span>
               </div>
               <div>
                 <h2 className="">Days spent</h2>
                 <span>
-                  {(props.endingDate - props.startingDate) *
-                    1000 *
-                    60 *
-                    60 *
+                  {(new Date(props.endingDate) - new Date(props.startingDate)) /
+                    1000 /
+                    60 /
+                    60 /
                     24}
                 </span>
               </div>
@@ -39,9 +86,11 @@ function MyTrip(props) {
                 <span>$ {props.price}</span>
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center gap-4">
-              <h2 className="font-bold text-xl ">Your rating of the trip</h2>
-              <Rating></Rating>
+            <div className="flex flex-col items-left justify-center gap-4">
+              <h2 className="font-bold text-xl text-left">
+                Your rating of the trip
+              </h2>
+              <Rating value={value} setValue={setValue}></Rating>
             </div>
           </div>
         </div>
@@ -55,12 +104,20 @@ function MyTrip(props) {
             </p>
           </div>
           <div className="item w-full">
-            <textarea className=" resize-none focus:outline-none px-4 py-2 w-full border  h-36"></textarea>
+            <textarea
+              defaultValue={review?.text || ""}
+              ref={reviewRef}
+              className=" resize-none focus:outline-none px-4 py-2 w-full border  h-36"
+            ></textarea>
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <button className="bg-orange-500 py-2 px-6 text-white hover:bg-orange-400 transition-all duration-300 mb-4">
-            Submit Changes
+          <button
+            type="button"
+            onClick={submitReview}
+            className="bg-orange-500 py-2 px-6 text-white hover:bg-orange-400 transition-all duration-300 mb-4 flex items-center justify-center w-48"
+          >
+            {isLoading ? <span className="loader "></span> : "Submit changes"}
           </button>
         </div>
       </form>

@@ -13,7 +13,7 @@ function Travel(props) {
   const [location, setLocation] = useState(props.location[0]);
   const { error, sendRequest, isLoading, clearError } = useHttp();
   const [isOpen, setIsOpen] = useState(false);
-  const user = JSON.parse(props.user);
+  const user = props.user;
 
   useEffect(() => {
     if (user) {
@@ -85,12 +85,21 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return {
-    props: {
-      location: data,
-      user: req.cookies.user || null,
-    },
-  };
+  const userId = req.cookies.userId;
+  if (userId === null) {
+    return {
+      props: {
+        location: data,
+      },
+    };
+  }
+  const responseTwo = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
+  );
+  const parsedRes = await responseTwo.json();
+  const user = parsedRes.data;
+
+  return { props: { location: data, user } };
 }
 
 export default Travel;
