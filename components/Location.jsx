@@ -11,7 +11,7 @@ function Location(props) {
   const [zoom, setZoom] = useState(7);
 
   return (
-    <section className="font-rest mt-10 md:mt-4">
+    <section className="font-rest mt-10 md:mt-0">
       <div className="flex flex-col gap-10 md:gap-0 md:flex-row">
         <div className="item flex flex-col items-center justify-center gap-4">
           <h3 className="text-3xl font-semibold text-gray-400">Our route</h3>

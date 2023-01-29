@@ -95,14 +95,14 @@ function SignIn() {
     formikTwo.setFieldValue("image", e.target.files[0]);
   }; ///////////////////////////////////////
   return (
-    <div className="w-screen h-screen relative  flex justify-center items-center font-rest">
+    <div className="lg:h-screen relative  flex justify-center items-center  font-rest">
       <img
         className="w-full h-full absolute -z-10"
         src="/images/cover.png"
         alt=""
       ></img>
       <div className="max-w-5xl bg-[#f6f5f5] flex p-10 text-gray-600 gap-10 shadow-xl flex-col lg:flex-row ">
-        <div className="flex flex-col gap-4 w-full py-2 justify-center">
+        <div className="flex flex-col gap-4 w-full  justify-center">
           <div className="flex gap-2 items-center justify-left">
             <img className="w-8 h-8" src="/images/logo2.png"></img>
             <span className="font-logo text-orange-400">Seesight Travel</span>
@@ -187,13 +187,18 @@ function SignIn() {
                     ? `*${formikOne.errors.password}`
                     : ""
                 }`}</p>
+
                 <span className="text-sm text-green-700 cursor-pointer flex items-center justify-end">
                   Forgot Password?
                 </span>
               </div>
               {!register && (
                 <button className="bg-black  hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 mt-8">
-                  {formikOne.isSubmitting ? "logging in" : "Login"}
+                  {formikOne.isSubmitting ? (
+                    <span className="loader"></span>
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               )}
             </form>

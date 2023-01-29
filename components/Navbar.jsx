@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerActions, profileActions } from "@/store/store";
+import { AnimatePresence, motion } from "framer-motion";
+import MenuIcon from "@mui/icons-material/Menu";
 function Navbar(props) {
   const dispatch = useDispatch();
   const setRegisterToTrue = () => {
@@ -11,8 +13,30 @@ function Navbar(props) {
   const setRegisterToFalse = () => {
     dispatch(registerActions.setRegisterToFalse());
   };
-  const { user } = useSelector((state) => state.user);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const variants = {
+    hidden: {
+      translateY: "-100%",
+      translateX: "-5%",
+    },
+    visible: {
+      translateY: "40%",
+      translateX: "-5%",
+      transition: {
+        ease: "easeInOut",
+        duration: 0.4,
+      },
+    },
+    exit: {
+      translateY: "-100%",
+      transition: {
+        ease: "easeInOut",
+        duration: 0.4,
+      },
+    },
+  };
   return (
     <nav
       className={`navbar z-30 w-full px-6 py-4 flex justify-between items-center  fixed ${props.bg} transition-all duration-600 ease-in font-rest`}
@@ -40,7 +64,7 @@ function Navbar(props) {
         </div>
       )}
       {props.user && (
-        <div className="flex gap-6 ">
+        <div className="gap-6 hidden lg:flex">
           <Link
             onClick={() => dispatch(profileActions.setPage(1))}
             href="/users/me"
@@ -69,6 +93,56 @@ function Navbar(props) {
             ></img>
           </div>
         </div>
+      )}
+      {props.user && (
+        <>
+          <div
+            onClick={() => setIsOpen(true)}
+            className="gap-6 flex lg:hidden cursor-pointer"
+          >
+            <MenuIcon className="text-white"></MenuIcon>
+          </div>
+          <AnimatePresence mode="wait" initial={false}>
+            {isOpen && (
+              <motion.div
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="absolute lg:hidden  bg-black z-40 w-[105%]  flex  py-24 flex-col items-center justify-center gap-12"
+              >
+                <Link
+                  onClick={() => dispatch(profileActions.setPage(1))}
+                  href="/users/me"
+                  className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                >
+                  My profile
+                </Link>
+                <Link
+                  onClick={() => dispatch(profileActions.setPage(4))}
+                  href="/users/me"
+                  className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                >
+                  My reservations
+                </Link>
+                <Link
+                  onClick={() => dispatch(profileActions.setPage(3))}
+                  href="/users/me"
+                  className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                >
+                  My wishlist
+                </Link>
+                <button
+                  className="text-white"
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
       )}
     </nav>
   );

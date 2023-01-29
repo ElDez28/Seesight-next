@@ -61,28 +61,34 @@ function MyTrip(props) {
             <div>
               <h2 className="text-2xl text-green-600">{props.title}</h2>
             </div>
-            <div className="flex gap-12 border-b-2 py-4">
-              <div>
-                <h2 className="">Starting Date</h2>
-                <span>{startingDate}</span>
+            <div className="flex gap-12 border-b-2 py-4 flex-col md:flex-row">
+              <div className="flex gap-12 items-center justify-center text-center">
+                <div>
+                  <h2 className="">Starting Date</h2>
+                  <span>{startingDate}</span>
+                </div>
+                <div>
+                  <h2 className="">Ending Date</h2>
+                  <span>{endingDate}</span>
+                </div>
               </div>
-              <div>
-                <h2 className="">Ending Date</h2>
-                <span>{endingDate}</span>
-              </div>
-              <div>
-                <h2 className="">Days spent</h2>
-                <span>
-                  {(new Date(props.endingDate) - new Date(props.startingDate)) /
-                    1000 /
-                    60 /
-                    60 /
-                    24}
-                </span>
-              </div>
-              <div>
-                <h2 className="">Price</h2>
-                <span>$ {props.price}</span>
+              <div className="flex gap-12 items-center justify-center text-center">
+                <div>
+                  <h2 className="">Days spent</h2>
+                  <span>
+                    {(new Date(props.endingDate) -
+                      new Date(props.startingDate)) /
+                      1000 /
+                      60 /
+                      60 /
+                      24}
+                  </span>
+                </div>
+
+                <div>
+                  <h2 className="">Price</h2>
+                  <span>$ {props.price}</span>
+                </div>
               </div>
             </div>
             <div className="flex flex-col items-left justify-center gap-4">

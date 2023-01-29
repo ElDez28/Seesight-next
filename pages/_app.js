@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import NProgress from "nprogress";
 import NextNProgress from "nextjs-progressbar";
+
 export default function App({ Component, pageProps }) {
   NProgress.configure({ showSpinner: false });
 
