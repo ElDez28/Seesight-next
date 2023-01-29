@@ -62,7 +62,7 @@ function MyOrder(props) {
             <button
               onClick={cancelOrder}
               type="button"
-              className="text-white bg-red-600 px-4"
+              className="text-white bg-red-600 px-4 flex items-center justify-center"
             >
               {isLoading ? <span className="loader"></span> : "Cancel"}
             </button>

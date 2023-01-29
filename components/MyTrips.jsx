@@ -5,6 +5,7 @@ import AccHeader from "./AccHeader";
 function MyTrips(props) {
   const { sendRequest, isLoading, error, clearError } = useHttp();
   const reviews = props.user.myReviews;
+  console.log(reviews);
   const trips = props.orders.filter((item) => {
     return item.status === "aproved" && new Date(item.endingDate) < Date.now();
   });

@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "@/store/store";
 import { useHttp } from "@/hooks/useHttp";
 import Modal from "@/components/Modal";
+import Reviews from "../../components/Reviews";
+import UAParser from "ua-parser-js";
 function Travel(props) {
   const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.user);
@@ -58,6 +60,7 @@ function Travel(props) {
         setOpen={setIsOpen}
       ></TripHero>
       <Gallery images={location.images}></Gallery>
+      <Reviews reviews={props.reviews} deviceType={props.deviceType}></Reviews>
       <Location
         lng={location.finalLocation.coordinates[0]}
         lat={location.finalLocation.coordinates[1]}
@@ -73,6 +76,17 @@ function Travel(props) {
 export async function getServerSideProps(context) {
   const { params } = context;
   const { req } = context;
+
+  let userAgent;
+  if (req) {
+    userAgent = req.headers["user-agent"];
+  } else {
+    userAgent = navigator.userAgent;
+  }
+  const parser = new UAParser();
+  parser.setUA(userAgent);
+  const result = parser.getResult();
+  const deviceType = (result.device && result.device.type) || "desktop";
   const title = params.title;
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours?title=${title}`
@@ -85,12 +99,19 @@ export async function getServerSideProps(context) {
       notFound: true,
     };
   }
-
+  const tripId = data[0]._id;
+  const reviewsRes = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/reviews/${tripId}/tripReviews`
+  );
+  const reviewDate = await reviewsRes.json();
+  const reviews = reviewDate.data;
   const userId = req.cookies.userId;
   if (!userId) {
     return {
       props: {
         location: data,
+        deviceType,
+        reviews,
       },
     };
   } else {
@@ -100,7 +121,7 @@ export async function getServerSideProps(context) {
     const parsedRes = await responseTwo.json();
     const user = parsedRes.data;
 
-    return { props: { location: data, user } };
+    return { props: { location: data, user, deviceType, reviews } };
   }
 }
 

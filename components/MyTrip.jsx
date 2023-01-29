@@ -46,7 +46,6 @@ function MyTrip(props) {
       }
     }
   };
-  console.log(error);
 
   return (
     <div className="bg-white max-w-6xl  flex flex-col gap-12  mx-auto  p-12 shadow-xl ">

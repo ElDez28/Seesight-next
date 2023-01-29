@@ -20,8 +20,8 @@ function SignIn() {
 
   //formik
   const initialValues = {
-    email: "",
-    password: "",
+    email: "dezmic91@gmail.com",
+    password: "test1234",
   };
   const loginFormSubmit = async (values) => {
     const formData = new FormData();
@@ -60,7 +60,7 @@ function SignIn() {
         { "Content-Type": "multipart/form-data" }
       );
 
-      Cookie.set("user", res.data.user._id);
+      Cookie.set("userId", res.data.user._id);
       Cookie.set("expDate", Date.now() + 24 * 60 * 60 * 1000);
 
       router.replace("/");
