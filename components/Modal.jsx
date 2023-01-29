@@ -10,7 +10,7 @@ import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useHttp } from "@/hooks/useHttp";
 import { orderActions } from "@/store/store";
-
+import { useRouter } from "next/router";
 const style = {
   position: "absolute",
   top: "50%",
@@ -26,7 +26,7 @@ const style = {
 export default function BasicModal(props) {
   const { sendRequest, error, clearError, isLoading } = useHttp();
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const handleClose = () => props.setOpen(false);
   const order = useSelector((state) => state.order);
   const startingDay = new Date(order.firstDate).toLocaleString("default", {
@@ -43,6 +43,10 @@ export default function BasicModal(props) {
   const [price, setPrice] = useState(props.price);
   const [success, setSuccess] = useState(false);
   const createReservation = async () => {
+    if (!props.user) {
+      router.push("/signin");
+      return;
+    }
     const data = {
       startingDate: order.firstDate,
       endingDate: order.secondDate,

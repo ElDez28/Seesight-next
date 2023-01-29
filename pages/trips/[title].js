@@ -45,6 +45,7 @@ function Travel(props) {
           setOpen={setIsOpen}
           open={isOpen}
           price={location.price}
+          user={user}
         ></Modal>
       )}
       <TripHero
@@ -86,20 +87,21 @@ export async function getServerSideProps(context) {
   }
 
   const userId = req.cookies.userId;
-  if (userId === null) {
+  if (!userId) {
     return {
       props: {
         location: data,
       },
     };
-  }
-  const responseTwo = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
-  );
-  const parsedRes = await responseTwo.json();
-  const user = parsedRes.data;
+  } else {
+    const responseTwo = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
+    );
+    const parsedRes = await responseTwo.json();
+    const user = parsedRes.data;
 
-  return { props: { location: data, user } };
+    return { props: { location: data, user } };
+  }
 }
 
 export default Travel;

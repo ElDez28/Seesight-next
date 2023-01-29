@@ -34,20 +34,19 @@ export async function getServerSideProps({ req }) {
   );
   const data = await res.json();
   const userId = req.cookies.userId;
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
-  );
-  const userData = await response.json();
-  const user = userData.data;
-
-  if (!user) {
+  if (!userId) {
     return {
       props: {
         locations: data,
         user: null,
       },
     };
-  } else {
-    return { props: { locations: data, user } };
   }
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/${userId}/getMe`
+  );
+  const userData = await response.json();
+  const user = userData.data;
+
+  return { props: { locations: data, user } };
 }

@@ -34,7 +34,7 @@ const MyProfile = (props) => {
 export default MyProfile;
 export async function getServerSideProps({ req }) {
   const userId = req.cookies.userId || null;
-  if (userId === null) {
+  if (!userId) {
     return {
       redirect: {
         permanent: true,

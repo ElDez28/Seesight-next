@@ -1,6 +1,6 @@
 import CompleteList from "@/components/CompleteList";
 import ListHero from "@/components/ListHero";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Head from "next/head";
 import {
   faBridgeWater,
@@ -13,11 +13,9 @@ import {
   faBook,
   faCampground,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { userActions } from "@/store/store";
 
 function Index(props) {
-  const user = JSON.parse(props.user);
+  const user = props.user;
   const [trips, setTrips] = useState(props.locations.data);
   const icons = [
     faBridgeWater,
@@ -56,7 +54,7 @@ export async function getServerSideProps({ req }) {
   const data = await responseOne.json();
 
   const userId = req.cookies.userId;
-  if (userId === null) {
+  if (!userId) {
     return {
       props: {
         locations: data,
