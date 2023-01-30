@@ -65,7 +65,7 @@ function Travel(props) {
         duration={location.tripDuration}
         price={location.price}
       ></Location>
-      <TripFooter setOpen={setIsOpen}></TripFooter>
+      <TripFooter user={props.user} setOpen={setIsOpen}></TripFooter>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useRouter } from "next/router";
 function TripFooter(props) {
+  const router = useRouter();
   return (
     <footer className=" mt-2 py-0 pb-12 md:pb-0  md:py-12 font-rest overflow-hidden relative mx-2 md:mx-0">
       <img
@@ -25,7 +26,9 @@ function TripFooter(props) {
       </div>
       <div className="w-full items-center justify-center flex">
         <button
-          onClick={() => props.setOpen(true)}
+          onClick={() => {
+            props.user ? props.setOpen(true) : router.push("/signin");
+          }}
           className="mx-auto py-2 px-4 bg-orange-500 mb-4 text-white font-bold bg-top transition-all duration-300 hover:shadow-2xl"
         >
           Book your trip
