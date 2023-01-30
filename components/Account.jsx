@@ -70,6 +70,7 @@ function Account(props) {
                   width={500}
                   height={500}
                   className="image object-cover"
+                  alt=""
                   src={
                     formikOne.values.image === ""
                       ? `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${user.image}`

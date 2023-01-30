@@ -19,6 +19,7 @@ const Review = (props) => {
             height={100}
             className="w-full object-cover"
             src={props.image}
+            alt=""
           ></Image>
         </div>
         <div className="flex  flex-col">

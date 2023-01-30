@@ -4,7 +4,7 @@ function Trip(props) {
   return (
     <div className="cursor-pointer flex gap-6 items-center justify-between shadow-sm border-b-2 p-2">
       <div className="w-32  flex justify-start">
-        <Image src={props.image}></Image>
+        <Image src={props.image} alt=""></Image>
       </div>
       <div className="text-sm font-semibold text-gray-400 flex flex-col gap-2">
         <p>{props.timing}</p>

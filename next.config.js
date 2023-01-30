@@ -5,6 +5,6 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ["https://sightsee-travel.up.railway.app", "127.0.0.1"],
+    domains: ["sightsee-travel.up.railway.app", "127.0.0.1"],
   },
 };

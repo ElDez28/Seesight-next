@@ -55,6 +55,7 @@ function MyOrder(props) {
             src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${reservation.trip?.imageCover}`}
             height={600}
             width={600}
+            alt=""
           ></Image>
         </div>
 

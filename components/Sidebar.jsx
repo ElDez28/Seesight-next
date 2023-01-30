@@ -28,7 +28,7 @@ function Sidebar(props) {
         <div className="flex w-full justify-between">
           <div className="w-12 h-12 flex items-center  bg-black rounded-full p-2 mb-12">
             <Link href="/">
-              <Image className="" src={logo}></Image>
+              <Image className="" src={logo} alt=""></Image>
             </Link>
           </div>
           <div className="lg:hidden z-20 " onClick={() => setHide(false)}>

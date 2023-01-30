@@ -20,6 +20,7 @@ function Profile(props) {
         <Image
           className="absolute -z-10 min-w-screen min-h-screen object-cover "
           src={cover}
+          alt=""
         ></Image>
         {page === 1 && <Account user={props.user}></Account>}
         {page === 2 && (

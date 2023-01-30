@@ -29,6 +29,7 @@ function WishItem(props) {
               src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
               width={600}
               height={600}
+              alt=""
             ></Image>
             <Link
               href={`/trips/${props.name}`}

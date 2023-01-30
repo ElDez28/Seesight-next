@@ -93,6 +93,7 @@ function Navbar(props) {
               src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${props.user.image}`}
               width={100}
               height={100}
+              alt=""
             ></Image>
           </div>
         </div>
