@@ -43,7 +43,9 @@ const userSlice = createSlice({
       state.wishlist = newList;
     },
     addItem(state, action) {
-      state.wishlist.push(action.payload);
+      if (!state.wishlist.find((item) => item._id === action.payload._id)) {
+        state.wishlist = [...state.wishlist, action.payload];
+      }
     },
   },
 });

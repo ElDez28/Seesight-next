@@ -14,11 +14,11 @@ const MyProfile = (props) => {
         "get",
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
       );
-      if (wishlist.some((item) => item._id === data.data._id)) {
+
+      if (wishlist.some((item) => item._id === data.data.id)) {
         return;
-      } else {
-        dispatch(userActions.addItem(data.data));
       }
+      dispatch(userActions.addItem(data.data));
     });
   }, []);
 

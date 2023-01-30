@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 
 export default function HomePage(props) {
   const user = props.user;
-  console.log(user);
+
   return (
     <>
       <Head>
@@ -34,7 +34,7 @@ export async function getServerSideProps({ req }) {
   );
   const data = await res.json();
   const userId = req.cookies.userId;
-  console.log(userId);
+
   if (!userId) {
     return {
       props: {

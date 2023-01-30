@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AccHeader from "./AccHeader";
 import WishItem from "./WishItem";
 import { useDispatch, useSelector } from "react-redux";
+import Modal from "./Modal";
 
 function Wishlist(props) {
   const { wishlist } = useSelector((state) => state.user);
@@ -11,7 +12,7 @@ function Wishlist(props) {
       <AccHeader desc="wishlist" user={props.user}></AccHeader>
       <div className="mt-20">
         {wishlist.length > 0 &&
-          wishlist.map((item) => {
+          wishlist.map((item, i) => {
             const coordinates = [];
             item.locations.forEach((element) => {
               coordinates.push({
@@ -21,17 +22,19 @@ function Wishlist(props) {
               });
             });
             return (
-              <WishItem
-                key={item._id}
-                item={item}
-                id={item._id}
-                image={item.imageCover}
-                name={item.title}
-                theme={item.theme}
-                duration={item.tripDuration}
-                price={item.price}
-                coordinates={coordinates}
-              ></WishItem>
+              <>
+                <WishItem
+                  key={i}
+                  item={item}
+                  id={item._id}
+                  image={item.imageCover}
+                  name={item.title}
+                  theme={item.theme}
+                  duration={item.tripDuration}
+                  price={item.price}
+                  coordinates={coordinates}
+                ></WishItem>
+              </>
             );
           })}
         {wishlist.length === 0 && (

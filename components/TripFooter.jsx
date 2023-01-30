@@ -1,6 +1,6 @@
 import React from "react";
 
-function TripFooter() {
+function TripFooter(props) {
   return (
     <footer className=" mt-2 py-0 pb-12 md:pb-0  md:py-12 font-rest overflow-hidden relative mx-2 md:mx-0">
       <img
@@ -24,7 +24,10 @@ function TripFooter() {
         </p>
       </div>
       <div className="w-full items-center justify-center flex">
-        <button className="mx-auto py-2 px-4 bg-orange-500 mb-4 text-white font-bold bg-top transition-all duration-300 hover:shadow-2xl">
+        <button
+          onClick={() => props.setOpen(true)}
+          className="mx-auto py-2 px-4 bg-orange-500 mb-4 text-white font-bold bg-top transition-all duration-300 hover:shadow-2xl"
+        >
           Book your trip
         </button>
       </div>

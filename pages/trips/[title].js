@@ -18,19 +18,13 @@ function Travel(props) {
   const user = props.user;
 
   useEffect(() => {
-    if (user) {
-      user.myWishlist.forEach(async (id) => {
-        const { data } = await sendRequest(
-          "get",
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
-        );
-        if (wishlist.some((item) => item._id === data.data._id)) {
-          return;
-        } else {
-          dispatch(userActions.addItem(data.data));
-        }
-      });
-    }
+    user.myWishlist.forEach(async (id) => {
+      const { data } = await sendRequest(
+        "get",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours/${id}`
+      );
+      dispatch(userActions.addItem(data.data));
+    });
   }, []);
   const coordinates = location.locations.map((item) => {
     return {
@@ -69,7 +63,7 @@ function Travel(props) {
         duration={location.tripDuration}
         price={location.price}
       ></Location>
-      <TripFooter></TripFooter>
+      <TripFooter setOpen={setIsOpen}></TripFooter>
     </>
   );
 }

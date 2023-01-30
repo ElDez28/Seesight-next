@@ -11,6 +11,7 @@ function MyOrder(props) {
   const price = props.order.price;
   const [status, setStatus] = useState(props.order.status);
   const [reservation, setReservation] = useState(props.order);
+  console.log(reservation);
   const startingDate = new Date(props.order.startingDate).toLocaleString(
     "default",
     {
@@ -50,14 +51,14 @@ function MyOrder(props) {
         <div className={`item flex  items-center p-0`}>
           <img
             className=" w-full h-full object-cover "
-            src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${reservation.trip.imageCover}`}
+            src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${reservation.trip?.imageCover}`}
           ></img>
         </div>
 
         <div className="itemTwo flex flex-col items-start justify-start gap-4">
           <div className="flex justify-between w-full">
             <h3 className="text-3xl font-semibold text-gray-400 ">
-              {reservation.trip.title}
+              {reservation.trip?.title}
             </h3>
             <button
               onClick={cancelOrder}
@@ -89,7 +90,7 @@ function MyOrder(props) {
                   Estimated travel time
                 </p>
                 <span className={`text-orange-400 font-bold  text-sm`}>
-                  {reservation.trip.tripDuration}
+                  {reservation.trip?.tripDuration}
                 </span>
               </div>
               <div className="flex flex-col mx-auto items-center">
