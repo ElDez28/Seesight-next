@@ -13,9 +13,9 @@ import { navActions, orderActions } from "@/store/store";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Cookie from "js-cookie";
-
+import Image from "next/image";
 import { userActions } from "@/store/store";
-
+import tripHero from "../public/images/tripHero1.jpg";
 function TripHero(props) {
   const { error, isLoading, clearError, sendRequest } = useHttp();
   const { wishlist } = useSelector((state) => state.user);
@@ -88,11 +88,13 @@ function TripHero(props) {
       <header ref={ref} className="flex items-center font-rest ">
         <div className="w-full flex items-center justify-center min-h-[90vh] overflow-hidden relative">
           <div className="absolute w-full h-full bg-black bg-opacity-70"></div>
-          <img
+          <Image
             className="absolute  h-full w-full object-cover -z-10"
-            src="/images/tripHero1.jpg"
+            src={tripHero}
             alt=""
-          ></img>
+            unoptimized={true}
+            priority
+          ></Image>
           <div className="bg-black px-12 py-8  max-w-6xl  rounded-2xl z-10 text-white text-center mx-4 md:mx-auto -mt-14">
             <h1 className="text-6xl font-bold ">{props.title}</h1>
             <h2 className="font-logo text-orange-400 text-3xl -rotate-6 mb-6">

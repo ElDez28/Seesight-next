@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Rating from "./Rating";
 import { useHttp } from "@/hooks/useHttp";
 import { useRef } from "react";
+import Image from "next/image";
 function MyTrip(props) {
   const { sendRequest, error, clearError, isLoading } = useHttp();
   const startingDate = new Date(props.startingDate).toLocaleString("default", {
@@ -52,10 +53,12 @@ function MyTrip(props) {
       <form>
         <div className="flex flex-col md:flex-row gap-12 text-gray-500 font-medium font-rest mb-8">
           <div className="item">
-            <img
+            <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
               alt=""
-            ></img>
+              height={700}
+              width={700}
+            ></Image>
           </div>
           <div className="item flex flex-col items-center justify-center gap-12">
             <div>

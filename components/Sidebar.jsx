@@ -4,6 +4,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { profileActions } from "@/store/store";
+import Image from "next/image";
+import logo from "../public/images/4153548.png";
 function Sidebar(props) {
   const [hide, setHide] = useState(false);
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ function Sidebar(props) {
         <div className="flex w-full justify-between">
           <div className="w-12 h-12 flex items-center  bg-black rounded-full p-2 mb-12">
             <Link href="/">
-              <img className="" src="/images/4153548.png"></img>
+              <Image className="" src={logo}></Image>
             </Link>
           </div>
           <div className="lg:hidden z-20 " onClick={() => setHide(false)}>

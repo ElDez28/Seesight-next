@@ -9,6 +9,10 @@ import loginSchema from "@/schemas/loginSchema";
 import signupSchema from "@/schemas/signupSchema";
 import { useRouter } from "next/router";
 import Cookie from "js-cookie";
+import Image from "next/image";
+import cover from "../../public/images/cover.png";
+import logo from "../../public/images/logo2.png";
+import vector from "../../public/images/vector2.png";
 
 function SignIn() {
   const router = useRouter();
@@ -96,15 +100,15 @@ function SignIn() {
   }; ///////////////////////////////////////
   return (
     <div className="lg:h-screen relative  flex justify-center items-center  font-rest">
-      <img
+      <Image
         className="w-full h-full absolute -z-10"
-        src="/images/cover.png"
+        src={cover}
         alt=""
-      ></img>
+      ></Image>
       <div className="max-w-5xl bg-[#f6f5f5] flex p-10 text-gray-600 gap-10 shadow-xl flex-col lg:flex-row ">
         <div className="flex flex-col gap-4 w-full  justify-center">
           <div className="flex gap-2 items-center justify-left">
-            <img className="w-8 h-8" src="/images/logo2.png"></img>
+            <Image className="w-8 h-8" src={logo}></Image>
             <span className="font-logo text-orange-400">Seesight Travel</span>
           </div>
           <h3>
@@ -112,7 +116,7 @@ function SignIn() {
             especially luxurious trips are sure to fit the bill.
           </h3>
           <div className="">
-            <img className="w-full" src="/images/vector2.png"></img>
+            <Image className="w-full" src={vector}></Image>
           </div>
         </div>
         <div className="bg-white w-full px-4 py-6 flex flex-col justify-between gap-12 mx-auto shadow-xl  ">

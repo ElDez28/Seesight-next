@@ -3,7 +3,8 @@ import Navbar from "./Navbar";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "@/store/store";
-
+import voz from "../public/images/voz.png";
+import Image from "next/image";
 function ListHero(props) {
   const dispatch = useDispatch();
   const [searchBy, setSearchBy] = useState("city");
@@ -40,7 +41,10 @@ function ListHero(props) {
   return (
     <header ref={ref} className="font-rest">
       <Navbar user={props.user} bg={bg}></Navbar>
-      <div className="h-[768px] bg-[url('/images/voz.png')] bg-cover bg-no-repeat flex items-center justify-center">
+      <div className="h-[768px] bg-cover bg-no-repeat flex items-center justify-center relative">
+        <div className="absolute w-full h-full -z-10">
+          <Image className="w-full h-full object-cover" src={voz}></Image>
+        </div>
         <div className="max-w-6xl   py-20 px-10 rounded-xl text-white text-center">
           <h1 className="text-6xl  font-bold">Find your dream trip</h1>
           <span>ENJOY AND DISCOVER</span>

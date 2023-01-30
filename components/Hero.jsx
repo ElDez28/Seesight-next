@@ -4,7 +4,8 @@ import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "@/store/store";
-
+import hero from "../public/images/hero.jpeg";
+import Image from "next/image";
 function Hero(props) {
   const dispatch = useDispatch();
   const bg = useSelector((state) => state.navbar.bg);
@@ -26,11 +27,13 @@ function Hero(props) {
       <Navbar user={props.user} bg={bg}></Navbar>
       <div className="h-screen  bg-cover flex justify-center items-center flex-col">
         <div className="absolute h-full">
-          <img
+          <Image
             className=" w-screen h-full object-fit -z-10"
-            src="/images/hero.jpeg"
+            src={hero}
             alt=""
-          ></img>
+            unoptimized={true}
+            priority
+          ></Image>
         </div>
         <div className="absolute bg-black opacity-60  w-full h-full  "></div>
         <div className="bg-black py-16 px-10  rounded-2xl font-rest z-10 flex-col text-white text-center max-w-3xl">

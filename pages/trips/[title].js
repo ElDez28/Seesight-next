@@ -56,7 +56,12 @@ function Travel(props) {
         setOpen={setIsOpen}
       ></TripHero>
       <Gallery images={location.images}></Gallery>
-      <Reviews reviews={props.reviews} deviceType={props.deviceType}></Reviews>
+      {props.reviews.length > 0 && (
+        <Reviews
+          reviews={props.reviews}
+          deviceType={props.deviceType}
+        ></Reviews>
+      )}
       <Location
         lng={location.finalLocation.coordinates[0]}
         lat={location.finalLocation.coordinates[1]}

@@ -1,15 +1,15 @@
 import React from "react";
 import {
-  faTwitter,
-  faFacebook,
-  faInstagram,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
-import {
   faChevronCircleRight,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
+import facebook from "../public/images/facebook.png";
+import twitter from "../public/images/twitter.png";
+import instagram from "../public/images/instagram.png";
+import youtube from "../public/images/youtube.png";
+import logo from "../public/images/4153548.png";
 function Footer() {
   return (
     <footer className="bg-gray-700 font-rest">
@@ -18,7 +18,7 @@ function Footer() {
           <div className="flex flex-col items-center lg:items-start">
             <span className="mb-2">About Us</span>
             <div className="flex items-center gap-2 mb-2">
-              <img className="w-8 h-8" src="/images/4153548.png" alt=""></img>
+              <Image className="w-8 h-8" src={logo} alt=""></Image>
               <span className="font-logo">Seesight Travel</span>
             </div>
             <p className="leading-tight max-w-sm text-center lg:text-left mb-2">
@@ -27,16 +27,16 @@ function Footer() {
             </p>
             <div className="flex gap-2 ">
               <div className="w-8 cursor-pointer">
-                <img src="/images/twitter.png" alt=""></img>
+                <Image src={twitter} alt=""></Image>
               </div>
               <div className="w-8 cursor-pointer">
-                <img src="/images/instagram.png" alt=""></img>
+                <Image src={instagram} alt=""></Image>
               </div>
               <div className="w-8 cursor-pointer">
-                <img src="/images/facebook.png" alt=""></img>
+                <Image src={facebook} alt=""></Image>
               </div>
               <div className="w-8 cursor-pointer">
-                <img src="/images/youtube.png" alt=""></img>
+                <Image src={youtube} alt=""></Image>
               </div>
             </div>
           </div>

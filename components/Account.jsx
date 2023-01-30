@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { useHttp } from "@/hooks/useHttp";
 import updateSchema from "../schemas/updateSchema";
 import AccHeader from "./AccHeader";
+import Image from "next/image";
 function Account(props) {
   const { error, isLoading, clearError, sendRequest } = useHttp();
   const user = props.user;
@@ -60,16 +61,21 @@ function Account(props) {
             onSubmit={formikOne.handleSubmit}
             className=" bg-white flex flex-col lg:flex-row justify-between items-center shadow-xl "
           >
-            <label htmlFor="file" className="item relative cursor-pointer ">
+            <label
+              htmlFor="file"
+              className="item relative cursor-pointer max-h-[36rem] overflow-hidden"
+            >
               {user != null && (
-                <img
-                  className="w-full h-full object-cover"
+                <Image
+                  width={500}
+                  height={500}
+                  className="image object-cover"
                   src={
                     formikOne.values.image === ""
                       ? `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${user.image}`
                       : URL.createObjectURL(formikOne.values.image)
                   }
-                ></img>
+                ></Image>
               )}
 
               <AddPhotoAlternateIcon className="absolute text-white bottom-4 left-2 h-10 w-10 cursor-pointer"></AddPhotoAlternateIcon>

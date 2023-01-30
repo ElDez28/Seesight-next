@@ -5,6 +5,7 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
 import { useHttp } from "@/hooks/useHttp";
 import { useState } from "react";
+import Image from "next/image";
 function MyOrder(props) {
   const day = 24 * 60 * 60 * 1000;
   const { isLoading, error, sendRequest, clearError } = useHttp();
@@ -49,10 +50,12 @@ function MyOrder(props) {
     <div className="bg-white max-w-6xl  flex  gap-12  mx-auto mt-10 p-12 shadow-xl ">
       <div className="flex font-rest gap-6 flex-col lg:flex-row  ">
         <div className={`item flex  items-center p-0`}>
-          <img
-            className=" w-full h-full object-cover "
+          <Image
+            className=" h-full object-cover "
             src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${reservation.trip?.imageCover}`}
-          ></img>
+            height={600}
+            width={600}
+          ></Image>
         </div>
 
         <div className="itemTwo flex flex-col items-start justify-start gap-4">

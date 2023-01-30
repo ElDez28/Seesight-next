@@ -5,9 +5,10 @@ import MyTrips from "./MyTrips";
 import Sidebar from "./Sidebar";
 import Wishlist from "./Wishlist";
 import Complaint from "./Complaint";
-import { useDispatch, useSelector } from "react-redux";
-import { profileActions } from "@/store/store";
+import { useSelector } from "react-redux";
+import cover from "../public/images/cover2.jpg";
 import MyOrders from "./MyOrders";
+import Image from "next/image";
 function Profile(props) {
   const page = useSelector((state) => state.profile.page);
   const [orders, setOrders] = useState(props.orders);
@@ -16,10 +17,10 @@ function Profile(props) {
     <div className="flex font-rest">
       <Sidebar page={page}></Sidebar>
       <div className="flex-1 pt-10 px-10 relative flex flex-col items-center">
-        <img
+        <Image
           className="absolute -z-10 min-w-screen min-h-screen object-cover "
-          src="/images/cover2.jpg"
-        ></img>
+          src={cover}
+        ></Image>
         {page === 1 && <Account user={props.user}></Account>}
         {page === 2 && (
           <MyTrips orders={props.orders} user={props.user}></MyTrips>

@@ -1,9 +1,9 @@
 import React from "react";
 import { useHttp } from "@/hooks/useHttp";
 import Link from "next/link";
-import Cookie from "js-cookie";
 import { userActions } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 function WishItem(props) {
   const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.user);
@@ -24,10 +24,12 @@ function WishItem(props) {
       <div className="bg-white max-w-6xl  flex  gap-12  mx-auto  p-12 shadow-xl mb-12">
         <div className="flex font-rest gap-6 flex-col lg:flex-row  ">
           <div className="item flex flex-col items-center justify-between">
-            <img
+            <Image
               className="object-cover h-full pb-4"
               src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`}
-            ></img>
+              width={600}
+              height={600}
+            ></Image>
             <Link
               href={`/trips/${props.name}`}
               className={`py-2 w-full bg-transparent border b-${props.theme}  hover:text-white transition-all duration-300 flex justify-center items-center`}

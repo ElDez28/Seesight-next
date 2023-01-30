@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { registerActions, profileActions } from "@/store/store";
 import { AnimatePresence, motion } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
+
 function Navbar(props) {
   const dispatch = useDispatch();
   const setRegisterToTrue = () => {
@@ -87,10 +88,12 @@ function Navbar(props) {
             My wishlist
           </Link>
           <div className="w-10 h-10 rounded-full overflow-hidden ">
-            <img
+            <Image
               className="w-full"
               src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${props.user.image}`}
-            ></img>
+              width={100}
+              height={100}
+            ></Image>
           </div>
         </div>
       )}

@@ -1,10 +1,10 @@
 import React from "react";
-
+import Image from "next/image";
 function Trip(props) {
   return (
     <div className="cursor-pointer flex gap-6 items-center justify-between shadow-sm border-b-2 p-2">
       <div className="w-32  flex justify-start">
-        <img src={props.image}></img>
+        <Image src={props.image}></Image>
       </div>
       <div className="text-sm font-semibold text-gray-400 flex flex-col gap-2">
         <p>{props.timing}</p>

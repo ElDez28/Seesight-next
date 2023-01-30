@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 function AccHeader(props) {
   return (
     <div className="flex flex-col lg:flex-row items-end justify-between w-full bg-white p-2">
@@ -12,11 +12,13 @@ function AccHeader(props) {
         </span>
       </div>
       <div className="text-gray-400 font-medium flex items-center gap-2 order-1 lg:order-2">
-        <img
+        <Image
           className=" w-12 h-12 object-cover rounded-full"
           src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${props.user.image}`}
           alt=""
-        ></img>
+          width={100}
+          height={100}
+        ></Image>
         <h2>Hello {props.user.username}</h2>
       </div>
     </div>
