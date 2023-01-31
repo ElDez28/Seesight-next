@@ -74,7 +74,7 @@ const Reservation = (props) => {
   };
   return (
     <div className="flex flex-col gap-2 shadow-sm p-4 ">
-      <div className="flex flex-col justify-between  md:flex-row ">
+      <div className="flex flex-col justify-between gap-6 md:flex-row ">
         <div className="flex flex-col gap-1 items-center justify-center item">
           <div className="flex gap-2 justify-center items-center">
             <h3>Trip to:</h3>
@@ -97,7 +97,7 @@ const Reservation = (props) => {
         </div>
         <div className="flex flex-col gap-1 items-center justify-center item">
           <div className="flex gap-2">
-            <h3>Price</h3>
+            <h3>Price:</h3>
             <span>{props.price} $</span>
           </div>
           <div className="flex gap-2">
@@ -116,7 +116,7 @@ const Reservation = (props) => {
           </div>
         </div>
       </div>
-      <div className="w-[48rem] flex gap-4 justify-between">
+      <div className="lg:w-[48rem] flex gap-4 flex-col lg:flex-row  justify-between">
         <button
           type="button"
           className="flex item items-center justify-center bg-green-400 text-white py-2 hover:bg-green-500 transition-all duration-150"

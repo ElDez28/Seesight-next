@@ -17,10 +17,10 @@ const ComplaintItem = (props) => {
     }
   };
   return (
-    <div className="flex flex-col shadow-sm p-4">
+    <div className="flex flex-col shadow-sm p-4 ">
       <p>{props.text}</p>
       <div
-        className="flex flex-col  w-full justify-end items-end text-gray-300
+        className="flex flex-col  w-full justify-end items-end text-gray-300 mb-4
       "
       >
         <span>{props.name}</span>

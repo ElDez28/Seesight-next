@@ -138,29 +138,65 @@ function Navbar(props) {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="absolute lg:hidden  bg-black z-40 w-[105%]  flex  py-24 flex-col items-center justify-center gap-12"
+                className="absolute lg:hidden  bg-black z-40 w-[110%]  left-0   flex  py-24 flex-col items-center justify-center gap-12 "
               >
-                <Link
-                  onClick={() => dispatch(profileActions.setPage(1))}
-                  href="/users/me"
-                  className="text-white border-b transition-all duration-100 flex items-center justify-center"
-                >
-                  My profile
-                </Link>
-                <Link
-                  onClick={() => dispatch(profileActions.setPage(4))}
-                  href="/users/me"
-                  className="text-white border-b transition-all duration-100 flex items-center justify-center"
-                >
-                  My reservations
-                </Link>
-                <Link
-                  onClick={() => dispatch(profileActions.setPage(3))}
-                  href="/users/me"
-                  className="text-white border-b transition-all duration-100 flex items-center justify-center"
-                >
-                  My wishlist
-                </Link>
+                {props.user.role === "user" && (
+                  <div className=" flex flex-col items-center justify-center gap-12">
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(1))}
+                      href="/users/me"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      My profile
+                    </Link>
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(4))}
+                      href="/users/me"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      My reservations
+                    </Link>
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(3))}
+                      href="/users/me"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      My wishlist
+                    </Link>
+                  </div>
+                )}
+                {props.user.role === "admin" && (
+                  <div className=" flex flex-col items-center justify-center gap-12">
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(1))}
+                      href="/users/admin"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      My profile
+                    </Link>
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(6))}
+                      href="/users/admin"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      Users
+                    </Link>
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(7))}
+                      href="/users/admin"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      Reservations
+                    </Link>
+                    <Link
+                      onClick={() => dispatch(profileActions.setPage(8))}
+                      href="/users/admin"
+                      className="text-white border-b transition-all duration-100 flex items-center justify-center"
+                    >
+                      Complaints
+                    </Link>
+                  </div>
+                )}
                 <button
                   className="text-white"
                   type="button"
