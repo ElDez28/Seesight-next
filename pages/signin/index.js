@@ -23,9 +23,24 @@ function SignIn() {
   const regex = /([^\\]+$)/;
 
   //formik
-  const initialValues = {
-    email: "dezmic91@gmail.com",
-    password: "test1234",
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const initialValues = values;
+  const setUserValues = (e) => {
+    e.preventDefault();
+    setValues({
+      email: "laura@example.com",
+      password: "test1234",
+    });
+  };
+  const setAdminValues = (e) => {
+    e.preventDefault();
+    setValues({
+      email: "dezmic91@gmail.com",
+      password: "test1234",
+    });
   };
   const loginFormSubmit = async (values) => {
     const formData = new FormData();
@@ -97,7 +112,8 @@ function SignIn() {
   const filePicker = (e) => {
     setFileName(e.target.value?.match(regex)[0]);
     formikTwo.setFieldValue("image", e.target.files[0]);
-  }; ///////////////////////////////////////
+  };
+
   return (
     <div className="lg:h-screen relative  flex justify-center items-center  font-rest">
       <Image
@@ -196,8 +212,24 @@ function SignIn() {
                   Forgot Password?
                 </span>
               </div>
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={setUserValues}
+                  className="item bg-green-400 py-2 px-4 text-white"
+                >
+                  user credentials
+                </button>
+                <button
+                  onClick={setAdminValues}
+                  type="button"
+                  className="item bg-green-400 py-2 px-4 text-white"
+                >
+                  admin credentials
+                </button>
+              </div>
               {!register && (
-                <button className="bg-black  hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 mt-8">
+                <button className="bg-black  hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 ">
                   {formikOne.isSubmitting ? (
                     <span className="loader"></span>
                   ) : (

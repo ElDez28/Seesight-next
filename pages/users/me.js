@@ -34,7 +34,7 @@ const MyProfile = (props) => {
 export default MyProfile;
 export async function getServerSideProps({ req }) {
   const userId = req.cookies.userId || null;
-  if (!userId) {
+  if (!userId || userId === "null") {
     return {
       redirect: {
         permanent: true,
@@ -53,13 +53,17 @@ export async function getServerSideProps({ req }) {
   );
 
   const { data } = await responseTwo.json();
-  if (!user) {
+
+  if (user.role === "admin") {
     return {
-      props: {
-        user: null,
+      redirect: {
+        permanent: true,
+        destination: "/",
       },
     };
-  } else if (!data) {
+  }
+
+  if (!data) {
     return {
       props: { user },
     };

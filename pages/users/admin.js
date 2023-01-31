@@ -1,11 +1,16 @@
+import Profile from "@/components/Profile";
 import React from "react";
 
-function Admin() {
-  return <div>Admin</div>;
+function Admin(props) {
+  return (
+    <Profile orders={props.orders} user={props.user}>
+      Admin
+    </Profile>
+  );
 }
 export async function getServerSideProps({ req }) {
   const userId = req.cookies.userId || null;
-  if (!userId) {
+  if (!userId || userId === "null") {
     return {
       redirect: {
         permanent: true,
@@ -34,10 +39,10 @@ export async function getServerSideProps({ req }) {
   const complaintRes = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/orders`
   );
-  const parsedComplaintRes = await orderRes.json();
+  const parsedComplaintRes = await complaintRes.json();
   const complaints = parsedComplaintRes.data;
   return {
-    props: { user, orders },
+    props: { user, orders, complaints },
   };
 }
 export default Admin;

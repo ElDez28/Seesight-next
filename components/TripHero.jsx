@@ -92,8 +92,6 @@ function TripHero(props) {
             className="absolute  h-full w-full object-cover -z-10"
             src={tripHero}
             alt=""
-            unoptimized={true}
-            priority
           ></Image>
           <div className="bg-black px-12 py-8  max-w-6xl  rounded-2xl z-10 text-white text-center mx-4 md:mx-auto -mt-14">
             <h1 className="text-6xl font-bold ">{props.title}</h1>

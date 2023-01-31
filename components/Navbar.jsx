@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { registerActions, profileActions } from "@/store/store";
 import { AnimatePresence, motion } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
+import Cookie from "js-cookie";
 
 function Navbar(props) {
   const dispatch = useDispatch();
@@ -38,6 +39,10 @@ function Navbar(props) {
       },
     },
   };
+  const logout = () => {
+    Cookie.set("userId", null);
+    window.location.reload();
+  };
   return (
     <nav
       className={`navbar z-30 w-full px-6 py-4 flex justify-between items-center  fixed ${props.bg} transition-all duration-600 ease-in font-rest`}
@@ -68,25 +73,45 @@ function Navbar(props) {
         <div className="gap-6 hidden lg:flex">
           <Link
             onClick={() => dispatch(profileActions.setPage(1))}
-            href="/users/me"
+            href={props.user.role === "admin" ? "/users/admin" : "/users/me"}
             className="text-white border-b transition-all duration-100 flex items-center justify-center"
           >
             My profile
           </Link>
-          <Link
-            onClick={() => dispatch(profileActions.setPage(4))}
-            href="/users/me"
+          {props.user.role === "user" && (
+            <Link
+              onClick={() => dispatch(profileActions.setPage(4))}
+              href="/users/me"
+              className="text-white border-b transition-all duration-100 flex items-center justify-center"
+            >
+              My reservations
+            </Link>
+          )}
+          {props.user.role === "user" && (
+            <Link
+              onClick={() => dispatch(profileActions.setPage(3))}
+              href="/users/me"
+              className="text-white border-b transition-all duration-100 flex items-center justify-center"
+            >
+              My wishlist
+            </Link>
+          )}
+          {props.user.role === "admin" && (
+            <Link
+              onClick={() => dispatch(profileActions.setPage(6))}
+              href="/users/admin"
+              className="text-white border-b transition-all duration-100 flex items-center justify-center"
+            >
+              Admin Panel
+            </Link>
+          )}
+
+          <button
+            onClick={logout}
             className="text-white border-b transition-all duration-100 flex items-center justify-center"
           >
-            My reservations
-          </Link>
-          <Link
-            onClick={() => dispatch(profileActions.setPage(3))}
-            href="/users/me"
-            className="text-white border-b transition-all duration-100 flex items-center justify-center"
-          >
-            My wishlist
-          </Link>
+            Logout
+          </button>
           <div className="w-10 h-10 rounded-full overflow-hidden ">
             <Image
               className="w-full"

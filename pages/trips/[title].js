@@ -107,7 +107,7 @@ export async function getServerSideProps(context) {
   const reviewDate = await reviewsRes.json();
   const reviews = reviewDate.data;
   const userId = req.cookies.userId;
-  if (!userId) {
+  if (!userId || userId === "null") {
     return {
       props: {
         location: data,

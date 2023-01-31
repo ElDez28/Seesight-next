@@ -15,7 +15,7 @@ function Profile(props) {
 
   return (
     <div className="flex font-rest">
-      <Sidebar page={page}></Sidebar>
+      <Sidebar user={props.user} page={page}></Sidebar>
       <div className="flex-1 pt-10 px-10 relative flex flex-col items-center">
         <Image
           className="absolute -z-10 min-w-screen min-h-screen object-cover "

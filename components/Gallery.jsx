@@ -14,7 +14,6 @@ function Gallery(props) {
             alt=""
             height="100"
             width="100"
-            priority
             unoptimized={true}
           ></Image>
         </div>
@@ -30,8 +29,6 @@ function Gallery(props) {
             alt=""
             height="100"
             width="100"
-            priority
-            unoptimized={true}
           ></Image>
           <Image
             onClick={() => setFeaturedImg(1)}
@@ -42,8 +39,6 @@ function Gallery(props) {
             alt=""
             height="100"
             width="100"
-            priority
-            unoptimized={true}
           ></Image>
           <Image
             onClick={() => setFeaturedImg(2)}
@@ -54,8 +49,6 @@ function Gallery(props) {
             alt=""
             height="100"
             width="100"
-            priority
-            unoptimized={true}
           ></Image>
           <Image
             onClick={() => setFeaturedImg(3)}
@@ -66,8 +59,6 @@ function Gallery(props) {
             alt=""
             height="100"
             width="100"
-            priority
-            unoptimized={true}
           ></Image>
         </div>
       </div>

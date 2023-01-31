@@ -8,6 +8,7 @@ import Image from "next/image";
 import logo from "../public/images/4153548.png";
 function Sidebar(props) {
   const [hide, setHide] = useState(false);
+  const [openAdmin, setOpenAdmin] = useState(false);
   const dispatch = useDispatch();
   return (
     <>
@@ -48,50 +49,114 @@ function Sidebar(props) {
           >
             My Account
           </li>
-          <li
-            onClick={() => {
-              setHide(false);
-              dispatch(profileActions.setPage(2));
-            }}
-            className={`cursor-pointer border-b-2 ${
-              props.page === 2 && "border-orange-400"
-            }`}
-          >
-            My Trips
-          </li>
-          <li
-            onClick={() => {
-              setHide(false);
-              dispatch(profileActions.setPage(3));
-            }}
-            className={`cursor-pointer border-b-2 ${
-              props.page === 3 && "border-orange-400"
-            }`}
-          >
-            My Wishlist
-          </li>
-          <li
-            onClick={() => {
-              setHide(false);
-              dispatch(profileActions.setPage(4));
-            }}
-            className={`cursor-pointer border-b-2 ${
-              props.page === 4 && "border-orange-400"
-            }`}
-          >
-            My Reservations
-          </li>
-          <li
-            onClick={() => {
-              setHide(false);
-              dispatch(profileActions.setPage(5));
-            }}
-            className={`cursor-pointer border-b-2 ${
-              props.page === 5 && "border-orange-400"
-            }`}
-          >
-            My Complaints
-          </li>
+          {props.user.role === "user" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                dispatch(profileActions.setPage(2));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 2 && "border-orange-400"
+              }`}
+            >
+              My Trips
+            </li>
+          )}
+          {props.user.role === "user" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                dispatch(profileActions.setPage(3));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 3 && "border-orange-400"
+              }`}
+            >
+              My Wishlist
+            </li>
+          )}
+          {props.user.role === "user" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                dispatch(profileActions.setPage(4));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 4 && "border-orange-400"
+              }`}
+            >
+              My Reservations
+            </li>
+          )}
+          {props.user.role === "user" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                dispatch(profileActions.setPage(5));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 5 && "border-orange-400"
+              }`}
+            >
+              My Complaints
+            </li>
+          )}
+          {props.user.role === "admin" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                setOpenAdmin(true);
+                dispatch(profileActions.setPage(6));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 6 && "border-orange-400"
+              }`}
+            >
+              Users
+            </li>
+          )}
+          {props.user.role === "admin" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                setOpenAdmin(true);
+                dispatch(profileActions.setPage(7));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 7 && "border-orange-400"
+              }`}
+            >
+              Reservations
+            </li>
+          )}
+          {props.user.role === "admin" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                setOpenAdmin(true);
+                dispatch(profileActions.setPage(8));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 8 && "border-orange-400"
+              }`}
+            >
+              Complaints
+            </li>
+          )}
+          {props.user.role === "admin" && (
+            <li
+              onClick={() => {
+                setHide(false);
+                setOpenAdmin(true);
+                dispatch(profileActions.setPage(9));
+              }}
+              className={`cursor-pointer border-b-2 ${
+                props.page === 9 && "border-orange-400"
+              }`}
+            >
+              Add new trip
+            </li>
+          )}
         </ul>
       </div>
     </>

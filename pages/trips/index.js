@@ -54,7 +54,7 @@ export async function getServerSideProps({ req }) {
   const data = await responseOne.json();
 
   const userId = req.cookies.userId;
-  if (!userId) {
+  if (!userId || userId === "null") {
     return {
       props: {
         locations: data,
