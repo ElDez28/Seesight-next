@@ -24,7 +24,7 @@ function Sidebar(props) {
       <div
         className={`${
           !hide ? "-translate-x-96" : "translate-x-0"
-        }  lg:flex flex-col items-center px-4 py-6  w-64 h-screen lg:translate-x-0 lg:relative absolute bg-white z-10 border-r transition-transform duration-300 ease`}
+        }  lg:flex flex-col items-center px-4 py-6  w-64 min-h-screen fixed lg:translate-x-0 lg:relative  bg-white z-10 border-r transition-transform duration-300 ease`}
       >
         <div className="flex w-full justify-between">
           <div className="w-12 h-12 flex items-center  bg-black rounded-full p-2 mb-12">

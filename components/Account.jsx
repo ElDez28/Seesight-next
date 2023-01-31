@@ -54,7 +54,7 @@ function Account(props) {
   return (
     <>
       <AccHeader desc="profile page" user={props.user}></AccHeader>
-      <div className="lg:bg-gray-400 p-0 bg-transparent max-w-6xl max-h-xl mx-auto mt-20 lg:p-12 lg:bg-opacity-50 ">
+      <div className="lg:bg-gray-400 p-0 bg-transparent max-w-6xl max-h-xl mx-auto mt-20 lg:p-12 lg:bg-opacity-50 mb-10 ">
         <div className="flex gap-12 flex-row">
           <form
             onSubmit={formikOne.handleSubmit}
@@ -87,7 +87,7 @@ function Account(props) {
               accept=".jpg, .png, .jpeg"
               type="file"
             ></input>
-            <div className="p-10 flex flex-col  gap-6 item w-full">
+            <div className="p-10 item flex flex-col justify-center gap-6 w-full">
               <span className="font-bold text-xl text-gray-400">
                 My Profile
               </span>
