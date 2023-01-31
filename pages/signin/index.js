@@ -212,7 +212,7 @@ function SignIn() {
                   Forgot Password?
                 </span>
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-1 -mb-2">
                 <button
                   type="button"
                   onClick={setUserValues}

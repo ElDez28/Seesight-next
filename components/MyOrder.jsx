@@ -7,12 +7,10 @@ import { useHttp } from "@/hooks/useHttp";
 import { useState } from "react";
 import Image from "next/image";
 function MyOrder(props) {
-  const day = 24 * 60 * 60 * 1000;
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const price = props.order.price;
   const [status, setStatus] = useState(props.order.status);
   const [reservation, setReservation] = useState(props.order);
-  console.log(reservation);
   const startingDate = new Date(props.order.startingDate).toLocaleString(
     "default",
     {

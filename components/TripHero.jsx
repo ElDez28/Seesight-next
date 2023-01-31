@@ -109,90 +109,95 @@ function TripHero(props) {
           </div>
         </div>
       </header>
-      <section className="font-rest relative">
-        <div className="flex  flex-col   max-w-full items-center gap-6 justify-center mx-auto py-10 bg-black  ">
-          <div className="flex max-w-6xl  flex-col  items-center gap-2 justify-center py-2  px-3  shadow-lg ">
-            <div className="flex justify-between w-full gap-4 items-center bg-white py-4 px-4">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Stack className="" spacing={3}>
-                  <DesktopDatePicker
-                    minDate={order.defaultValue}
-                    className="bg-white "
-                    inputFormat="MM/DD/YYYY"
-                    label="Starting date"
-                    value={order.firstDate}
-                    onChange={handleFirstDateChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Stack>
-              </LocalizationProvider>
-              <LocalizationProvider className="item" dateAdapter={AdapterDayjs}>
-                <Stack spacing={3}>
-                  <DesktopDatePicker
-                    minDate={order.defaultValue + 24 * 60 * 60 * 1000}
-                    className="bg-white "
-                    inputFormat="MM/DD/YYYY"
-                    label="Return date"
-                    value={order.secondDate}
-                    onChange={handleSecondDateChange}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Stack>
-              </LocalizationProvider>
+      {props.user?.role !== "admin" && (
+        <section className="font-rest relative">
+          <div className="flex  flex-col   max-w-full items-center gap-6 justify-center mx-auto py-10 bg-black  ">
+            <div className="flex max-w-6xl  flex-col  items-center gap-2 justify-center py-2  px-3  shadow-lg ">
+              <div className="flex justify-between w-full gap-4 items-center bg-white py-4 px-4">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <Stack className="" spacing={3}>
+                    <DesktopDatePicker
+                      minDate={order.defaultValue}
+                      className="bg-white "
+                      inputFormat="MM/DD/YYYY"
+                      label="Starting date"
+                      value={order.firstDate}
+                      onChange={handleFirstDateChange}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </Stack>
+                </LocalizationProvider>
+                <LocalizationProvider
+                  className="item"
+                  dateAdapter={AdapterDayjs}
+                >
+                  <Stack spacing={3}>
+                    <DesktopDatePicker
+                      minDate={order.defaultValue + 24 * 60 * 60 * 1000}
+                      className="bg-white "
+                      inputFormat="MM/DD/YYYY"
+                      label="Return date"
+                      value={order.secondDate}
+                      onChange={handleSecondDateChange}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </Stack>
+                </LocalizationProvider>
 
-              <div className="item flex flex-col items-center justify-center text-xl font-bol text-gray-400">
-                <p>Price: </p>
-                <p>{price}$</p>
+                <div className="item flex flex-col items-center justify-center text-xl font-bol text-gray-400">
+                  <p>Price: </p>
+                  <p>{price}$</p>
+                </div>
+              </div>
+
+              <div className="flex gap-2 flex-col md:flex-row bg-black w-full">
+                {props.user && !inWishlist && (
+                  <button
+                    type="button"
+                    onClick={addToWishlist}
+                    className="bg-orange-500 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
+                  >
+                    {isLoading ? (
+                      <span class="loader"></span>
+                    ) : (
+                      <>
+                        Add to wishlist
+                        <FavoriteBorderIcon></FavoriteBorderIcon>
+                      </>
+                    )}
+                  </button>
+                )}
+
+                {props.user && inWishlist && (
+                  <button
+                    type="button"
+                    onClick={removeFromWishlist}
+                    className="bg-red-400 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
+                  >
+                    {isLoading ? (
+                      <span className="loader"></span>
+                    ) : (
+                      <>
+                        {" "}
+                        Remove from wishlist
+                        <DeleteForeverIcon></DeleteForeverIcon>
+                      </>
+                    )}
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => props.setOpen(true)}
+                  className="py-4 px-6  item bg-green-500 text-white font-bold "
+                >
+                  Make Reservation
+                </button>
               </div>
             </div>
-
-            <div className="flex gap-2 flex-col md:flex-row bg-black w-full">
-              {props.user && !inWishlist && (
-                <button
-                  type="button"
-                  onClick={addToWishlist}
-                  className="bg-orange-500 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
-                >
-                  {isLoading ? (
-                    <span class="loader"></span>
-                  ) : (
-                    <>
-                      Add to wishlist
-                      <FavoriteBorderIcon></FavoriteBorderIcon>
-                    </>
-                  )}
-                </button>
-              )}
-
-              {props.user && inWishlist && (
-                <button
-                  type="button"
-                  onClick={removeFromWishlist}
-                  className="bg-red-400 py-4 px-6 item  text-white font-bold flex items-center justify-center gap-4"
-                >
-                  {isLoading ? (
-                    <span className="loader"></span>
-                  ) : (
-                    <>
-                      {" "}
-                      Remove from wishlist
-                      <DeleteForeverIcon></DeleteForeverIcon>
-                    </>
-                  )}
-                </button>
-              )}
-
-              <button
-                type="button"
-                onClick={() => props.setOpen(true)}
-                className="py-4 px-6  item bg-green-500 text-white font-bold "
-              >
-                Make Reservation
-              </button>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

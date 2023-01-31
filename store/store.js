@@ -77,6 +77,63 @@ const orderSlice = createSlice({
   },
 });
 
+const adminSlice = createSlice({
+  name: "admin",
+  initialState: {
+    users: [],
+    reservations: [],
+    complaints: [],
+  },
+  reducers: {
+    setUsers(state, action) {
+      state.users = action.payload;
+    },
+    setReservations(state, action) {
+      state.reservations = action.payload;
+    },
+    setComplaints(state, action) {
+      state.complaints = action.payload;
+    },
+    changeUserStatus(state, action) {
+      const user = state.users.find((user) => user._id === action.payload.id);
+      user.isActive = action.payload.status;
+      const filteredUsers = state.users.filter(
+        (user) => user.id !== action.payload.id
+      );
+      const newUsers = [...filteredUsers, user];
+      state.users = newUsers;
+    },
+    changeResStatus(state, action) {
+      const reservation = state.reservations.find(
+        (res) => res._id === action.payload.id
+      );
+
+      reservation.status = action.payload.status;
+      const filteredReservations = state.reservations.filter(
+        (res) => res._id !== action.payload.id
+      );
+      const newRes = [...filteredReservations, reservation];
+      state.reservations = newRes.sort(
+        (a, b) => new Date(a.startingDate) - new Date(b.startingDate)
+      );
+    },
+    deleteRes(state, action) {
+      const newRes = state.reservations.filter(
+        (res) => res._id !== action.payload
+      );
+      state.reservations = newRes.sort(
+        (a, b) => new Date(a.startingDate) - new Date(b.startingDate)
+      );
+    },
+    deleteComplaint(state, action) {
+      const newRes = state.complaints.filter(
+        (com) => com._id !== action.payload
+      );
+      state.complaints = newRes;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
     navbar: navSlice.reducer,
@@ -84,6 +141,7 @@ const store = configureStore({
     user: userSlice.reducer,
     profile: profileSlice.reducer,
     order: orderSlice.reducer,
+    admin: adminSlice.reducer,
   },
 });
 
@@ -92,4 +150,5 @@ export const registerActions = registerSlice.actions;
 export const userActions = userSlice.actions;
 export const profileActions = profileSlice.actions;
 export const orderActions = orderSlice.actions;
+export const adminActions = adminSlice.actions;
 export default store;

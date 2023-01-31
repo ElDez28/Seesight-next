@@ -17,7 +17,6 @@ function Account(props) {
   };
 
   const updateMe = async (values = formikOne.values) => {
-    console.log(error);
     const formData = new FormData();
     formData.append("email", values.email);
     formData.append("phone", values.phone);

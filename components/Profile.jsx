@@ -9,6 +9,9 @@ import { useSelector } from "react-redux";
 import cover from "../public/images/cover2.jpg";
 import MyOrders from "./MyOrders";
 import Image from "next/image";
+import Users from "./Users";
+import Reservations from "./Reservations";
+import Complaints from "./Complaints";
 function Profile(props) {
   const page = useSelector((state) => state.profile.page);
   const [orders, setOrders] = useState(props.orders);
@@ -37,6 +40,9 @@ function Profile(props) {
           ></MyOrders>
         )}
         {page === 5 && <Complaint user={props.user}></Complaint>}
+        {page === 6 && <Users users={props.users}></Users>}
+        {page === 7 && <Reservations></Reservations>}
+        {page === 8 && <Complaints></Complaints>}
       </div>
     </div>
   );
