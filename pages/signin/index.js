@@ -229,7 +229,7 @@ function SignIn() {
                 </button>
               </div>
               {!register && (
-                <button className="bg-black  hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 ">
+                <button className="bg-black  hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 flex items-center justify-center">
                   {formikOne.isSubmitting ? (
                     <span className="loader"></span>
                   ) : (
@@ -344,11 +344,12 @@ function SignIn() {
                   type="file"
                 ></input>
               </div>
-              <button
-                type="submit"
-                className="bg-black hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 "
-              >
-                Submit
+              <button className="bg-black  hover:bg-gray-700 transition-all duration-300 py-2 text-sm text-gray-200 flex items-center justify-center">
+                {formikTwo.isSubmitting ? (
+                  <span className="loader"></span>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </form>
           )}

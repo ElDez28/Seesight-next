@@ -6,10 +6,29 @@ import {
   faBridgeWater,
   faSailboat,
   faWater,
+  faVideo,
+  faMosque,
+  faWind,
+  faHeart,
+  faBook,
+  faCampground,
 } from "@fortawesome/free-solid-svg-icons";
 
 function List(props) {
-  const icons = [faBridgeWater, faSailboat, faWater];
+  const icons = [
+    faBridgeWater,
+    faSailboat,
+    faWater,
+    faBridgeWater,
+    faSailboat,
+    faWater,
+    faVideo,
+    faMosque,
+    faWind,
+    faHeart,
+    faBook,
+    faCampground,
+  ];
 
   return (
     <section id="list" className="my-20 font-rest">

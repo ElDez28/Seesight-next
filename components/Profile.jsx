@@ -12,6 +12,7 @@ import Image from "next/image";
 import Users from "./Users";
 import Reservations from "./Reservations";
 import Complaints from "./Complaints";
+import NewTrip from "./NewTrip";
 function Profile(props) {
   const page = useSelector((state) => state.profile.page);
   const [orders, setOrders] = useState(props.orders);
@@ -43,6 +44,7 @@ function Profile(props) {
         {page === 6 && <Users users={props.users}></Users>}
         {page === 7 && <Reservations></Reservations>}
         {page === 8 && <Complaints></Complaints>}
+        {page === 9 && <NewTrip></NewTrip>}
       </div>
     </div>
   );

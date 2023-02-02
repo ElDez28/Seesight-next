@@ -5,8 +5,7 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
 
 function Location(props) {
-  mapboxgl.accessToken =
-    "pk.eyJ1IjoiZWxkaW4zMCIsImEiOiJjbDhxeDJpZzcwdm5kM29ydWJ6cXc3angwIn0.cACTQJ_pot0fZjU-f4VlTg";
+  mapboxgl.accessToken = process.env.NEXT_PUBLIC_API_KEY;
 
   const [zoom, setZoom] = useState(7);
 
