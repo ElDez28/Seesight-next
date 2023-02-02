@@ -47,9 +47,9 @@ function WishItem(props) {
               <button
                 type="button"
                 onClick={removeFromWishlist}
-                className="text-white bg-red-600 px-4"
+                className="text-white bg-red-600 px-4 flex items-center justify-center w-36"
               >
-                Delete
+                {isLoading ? <span className="loader"></span> : "Delete"}
               </button>
             </div>
             <div className="flex justify-center w-full">

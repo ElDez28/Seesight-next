@@ -80,9 +80,10 @@ function Reviews(props) {
         slidesToSlide={1}
         swipeable
       >
-        {props.reviews.map((review) => {
+        {props.reviews.map((review, i) => {
           return (
             <Review
+              key={i}
               image={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${review.user[0].image}`}
               text={review.text}
               username={review.user[0].username}
