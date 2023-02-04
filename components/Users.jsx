@@ -8,6 +8,7 @@ const Users = (props) => {
       {users.map((user) => {
         return (
           <User
+            key={user._id}
             email={user.email}
             phone={user.phone}
             image={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${user.image}`}

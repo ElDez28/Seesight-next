@@ -22,7 +22,6 @@ const responsive = {
   },
 };
 function Reviews(props) {
-  console.log(props.reviews);
   return (
     <div className="px-6 mb-4 mt-2">
       <Carousel
@@ -81,10 +80,16 @@ function Reviews(props) {
         swipeable
       >
         {props.reviews.map((review, i) => {
+          let source;
+          if (review.user[0].image.includes("https")) {
+            source = review.user[0].image;
+          } else {
+            source = `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${review.user[0].image}`;
+          }
           return (
             <Review
               key={i}
-              image={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${review.user[0].image}`}
+              image={source}
               text={review.text}
               username={review.user[0].username}
               rating={review.rating}

@@ -28,6 +28,7 @@ function Index(props) {
     faBook,
     faCampground,
   ];
+
   const settingTripsFn = useCallback((trips) => {
     setTrips(trips);
   }, []);

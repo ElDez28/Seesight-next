@@ -19,9 +19,6 @@ function List(props) {
     faBridgeWater,
     faSailboat,
     faWater,
-    faBridgeWater,
-    faSailboat,
-    faWater,
     faVideo,
     faMosque,
     faWind,
@@ -29,7 +26,7 @@ function List(props) {
     faBook,
     faCampground,
   ];
-
+  console.log(icons[11]);
   return (
     <section id="list" className="my-20 font-rest">
       <h2 className="text-center mb-10 font-bold text-6xl text-gray-400">

@@ -9,7 +9,7 @@ const Complaints = (props) => {
       {complaints.map((item) => {
         return (
           <ComplaintItem
-            key={item.id}
+            key={item._id}
             text={item.text}
             name={item.user.username}
             email={item.user.email}

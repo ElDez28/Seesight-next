@@ -44,13 +44,19 @@ function MyOrder(props) {
       setStatus("canceled");
     } catch (err) {}
   };
+  let source;
+  if (reservation.trip?.imageCover.includes("https")) {
+    source = reservation.trip.imageCover;
+  } else {
+    source = `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${reservation.trip?.imageCover}`;
+  }
   return (
     <div className="bg-white max-w-6xl  flex  gap-12  mx-auto mt-10 p-12 shadow-xl ">
       <div className="flex font-rest gap-6 flex-col lg:flex-row  ">
         <div className={`item flex  items-center p-0`}>
           <Image
             className=" h-full object-cover "
-            src={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${reservation.trip?.imageCover}`}
+            src={source}
             height={600}
             width={600}
             alt=""
