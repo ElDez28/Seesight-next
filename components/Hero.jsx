@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "@/store/store";
-import hero from "../public/images/hero.jpeg";
+import hero from "../public/images/hero.jpg";
 import Image from "next/image";
 function Hero(props) {
   const dispatch = useDispatch();
@@ -28,14 +28,14 @@ function Hero(props) {
       <div className="h-screen  bg-cover flex justify-center items-center flex-col">
         <div className="absolute h-full">
           <Image
-            className=" w-screen h-full object-fit -z-10"
+            className=" w-screen h-screen object-fit -z-10"
             src={hero}
             alt=""
             unoptimized={true}
             priority
           ></Image>
         </div>
-        <div className="absolute bg-black opacity-60  w-full h-[120%] bottom-0  "></div>
+
         <div className="bg-black py-16 px-10  rounded-2xl font-rest z-10 flex-col text-white text-center max-w-3xl">
           <h1 className="text-white text-5xl  font-bold mb-6">
             Most beautifle locations in Bosnia

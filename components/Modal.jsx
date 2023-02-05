@@ -96,8 +96,11 @@ export default function BasicModal(props) {
         aria-describedby="modal-modal-description"
         className="bg-black bg-opacity-60"
       >
-        <Box sx={style} className="font-rest max-w-6xl px-20 py-6">
-          <div className="flex justify-between w-full gap-4 items-center bg-white py-4 px-4 flex-col lg:flex-row">
+        <Box
+          sx={style}
+          className="font-rest max-w-6xl px-20 py-6 w-full md:w-max"
+        >
+          <div className="flex justify-between w-full gap-4 items-center bg-white py-4 px-4 flex-col md:flex-row">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack className="" spacing={3}>
                 <DesktopDatePicker

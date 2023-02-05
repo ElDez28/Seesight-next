@@ -15,7 +15,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Cookie from "js-cookie";
 import Image from "next/image";
 import { userActions } from "@/store/store";
-import tripHero from "../public/images/tripHero1.jpg";
+import tripHero from "../public/images/tripHero.jpg";
 function TripHero(props) {
   const { error, isLoading, clearError, sendRequest } = useHttp();
   const { wishlist } = useSelector((state) => state.user);
@@ -87,7 +87,6 @@ function TripHero(props) {
       <Navbar user={props.user} bg={bg}></Navbar>
       <header ref={ref} className="flex items-center font-rest ">
         <div className="w-full flex items-center justify-center min-h-[90vh] overflow-hidden relative">
-          <div className="absolute w-full h-full bg-black bg-opacity-70"></div>
           <Image
             className="absolute  h-full w-full object-cover -z-10"
             src={tripHero}
