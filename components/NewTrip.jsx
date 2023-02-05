@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import { useHttp } from "@/hooks/useHttp";
 import { uploadCloudinary } from "@/utils/upload";
+import newTripSchema from "@/schemas/newTripSchema";
 const NewTrip = () => {
   const locationRef = useRef();
   const titleRef = useRef();
@@ -24,32 +25,15 @@ const NewTrip = () => {
   const imageThreeRef = useRef();
   const imageFourRef = useRef();
   const multipleImagesRef = useRef();
-  const { sendRequest, error, isLoading, clearError } = useHttp();
+  const { sendRequest, error, isLoading, clearError, success } = useHttp();
   const newLocationRef = useRef();
   const [finalLocation, setFinalLocation] = useState("");
   const [coordinates, setCoordinates] = useState([]);
   const [newCoordinates, setNewCoordinates] = useState([]);
   const [geoError, setGeoError] = useState("");
-  const [links, setLinks] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
-  const [success, setSuccess] = useState(false);
-  useEffect(() => {
-    if (success === true) {
-      const timer = setTimeout(() => {
-        setSuccess(false);
-      }, 1000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [success]);
-  const createTrip = async () => {
-    try {
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   const initialValues = {
     title: titleRef.current?.value || "",
     descOne: descOneRef.current?.value,
@@ -75,14 +59,7 @@ const NewTrip = () => {
       imageFourRef.current?.files[0] || multipleImagesRef.current?.files[3],
   };
 
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues,
-    onSubmit: createTrip,
-  });
-
   const uploadImages = async (e) => {
-    e.preventDefault();
     const images = [
       formik.values.imageOne,
       formik.values.imageTwo,
@@ -120,13 +97,21 @@ const NewTrip = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/tours`,
         data
       );
-      setSuccess(true);
     } catch (err) {
       setUploadError(err.response.data.error.message);
+
       setIsUploading(false);
     }
   };
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    validateOnBlur: true,
+    validateOnChange: true,
+    initialValues,
+    onSubmit: uploadImages,
+    validationSchema: newTripSchema,
+  });
   useEffect(() => {
     if (finalLocation !== "") {
       const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${finalLocation}.json?access_token=${process.env.NEXT_PUBLIC_API_KEY}`;
@@ -189,11 +174,14 @@ const NewTrip = () => {
     multipleImagesRef.current?.files[3] &&
       formik.setFieldValue("imageFour", multipleImagesRef.current?.files[3]);
   };
-
+  console.log(formik.errors);
   return (
     <>
-      <form className="w-96  md:w-auto bg-white rounded-xl py-6 px-12 mt-20 shadow-2xl text-gray-500 flex flex-col gap-2">
-        <div className="flex gap-4 mb-2">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="w-96  md:w-auto bg-white rounded-xl py-6 px-12 my-20 shadow-2xl text-gray-500 flex flex-col gap-2"
+      >
+        <div className="flex gap-4 mb-2 flex-col lg:flex-row">
           <div className="flex flex-col gap-1">
             <label className="italic">Title</label>
             <input
@@ -272,7 +260,7 @@ const NewTrip = () => {
             </select>
           </div>
         </div>
-        <div className="flex gap-2 w-full mb-2">
+        <div className="flex gap-2 w-full mb-2 flex-col lg:flex-row">
           <div className="flex flex-col item gap-1">
             <label className="italic">Trip duration</label>
             <input
@@ -307,7 +295,7 @@ const NewTrip = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 w-full mb-2">
+        <div className="flex gap-2 w-full mb-2 flex-col lg:flex-row">
           <div className="flex flex-col item gap-1 item">
             <label className="italic">Final Location</label>
             <input
@@ -361,7 +349,7 @@ const NewTrip = () => {
             Add route locations
           </button>
         </div>
-        <div className="grid grid-cols-4 justify-between items-center gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 justify-between items-center gap-4">
           {newCoordinates?.map((coordinate, i) => {
             return (
               <div
@@ -381,7 +369,7 @@ const NewTrip = () => {
             );
           })}
         </div>
-        <div className="flex w-full justify-between ">
+        <div className="flex w-full justify-between flex-col lg:flex-row ">
           <div className="item flex items-left flex-col justify-center">
             <label
               htmlFor="cover"
@@ -411,6 +399,7 @@ const NewTrip = () => {
             </label>
             <input
               ref={imageCoverRef}
+              onBlur={formik.handleBlur}
               onChange={(e) => pickHandler(e, "imageCover")}
               className="hidden"
               id="cover"
@@ -558,11 +547,14 @@ const NewTrip = () => {
           </div>
           <label
             htmlFor="images"
-            className=" text-gray-600 flex items-center flex-col justify-center cursor-pointer"
+            className=" text-gray-600 flex items-center lg:flex-col justify-center cursor-pointer flex-row mt-4 lg:mt-0"
           >
             <FileUploadIcon className="w-12 h-12"></FileUploadIcon>
-            <span className="text-sm italic">
-              Upload <br></br> multiple <br></br>images <br></br>at once
+            <span className="text-sm italic flex lg:flex-col gap-1">
+              <span>Upload</span>
+              <span>multiple </span>
+              <span>images</span>
+              <span>at once</span>
             </span>
           </label>
           <input
@@ -575,8 +567,7 @@ const NewTrip = () => {
           ></input>
         </div>
         <button
-          onClick={uploadImages}
-          type="button"
+          type="submit"
           className="mt-6 bg-orange-400 text-white w-36 mx-auto py-2 hover:bg-orange-600 transition-all duration-700"
         >
           {isUploading || isLoading ? (
@@ -604,6 +595,12 @@ const NewTrip = () => {
             ? uploadError
             : error
             ? error.response.data.error.message
+            : formik.errors.imageCover ||
+              formik.errors.imageOne ||
+              formik.errors.imageTwo ||
+              formik.errors.imageThree ||
+              formik.errors.imageFour
+            ? "You have to provide all images"
             : ""}
         </span>
       </form>
