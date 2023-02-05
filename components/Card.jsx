@@ -4,18 +4,12 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 function Card(props) {
-  let source;
-  if (props.image.includes("http")) {
-    source = props.image;
-  } else {
-    source = `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`;
-  }
   return (
     <div className="w-full mx-auto  font-rest shadow-lg  ">
       <div className="w-full relative ">
         <Image
           className="w-full h-full"
-          src={source}
+          src={props.image}
           alt=""
           width="100"
           height="100"

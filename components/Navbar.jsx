@@ -6,8 +6,9 @@ import { registerActions, profileActions } from "@/store/store";
 import { AnimatePresence, motion } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 import Cookie from "js-cookie";
-
+import { useHttp } from "@/hooks/useHttp";
 function Navbar(props) {
+  const { sendRequest, error, clearError, isLoading } = useHttp();
   const dispatch = useDispatch();
   const setRegisterToTrue = () => {
     dispatch(registerActions.setRegisterToTrue());
@@ -39,10 +40,19 @@ function Navbar(props) {
       },
     },
   };
-  const logout = () => {
-    Cookie.set("userId", null);
-    window.location.reload();
+  const logout = async () => {
+    try {
+      await sendRequest(
+        "post",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/logout`
+      );
+      Cookie.set("userId", null);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
   };
+  console.log(error);
   return (
     <nav
       className={`navbar z-30 w-full px-6 py-4 flex justify-between items-center  fixed ${props.bg} transition-all duration-600 ease-in font-rest`}

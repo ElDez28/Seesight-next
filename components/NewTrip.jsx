@@ -23,6 +23,7 @@ const NewTrip = () => {
   const imageTwoRef = useRef();
   const imageThreeRef = useRef();
   const imageFourRef = useRef();
+  const multipleImagesRef = useRef();
   const { sendRequest, error, isLoading, clearError } = useHttp();
   const newLocationRef = useRef();
   const [finalLocation, setFinalLocation] = useState("");
@@ -64,10 +65,14 @@ const NewTrip = () => {
     },
     locations: newCoordinates,
     imageCover: imageCoverRef.current?.files[0],
-    imageOne: imageOneRef.current?.files[0],
-    imageTwo: imageTwoRef.current?.files[0],
-    imageThree: imageThreeRef.current?.files[0],
-    imageFour: imageFourRef.current?.files[0],
+    imageOne:
+      imageOneRef.current?.files[0] || multipleImagesRef.current?.files[0],
+    imageTwo:
+      imageTwoRef.current?.files[0] || multipleImagesRef.current?.files[1],
+    imageThree:
+      imageThreeRef.current?.files[0] || multipleImagesRef.current?.files[2],
+    imageFour:
+      imageFourRef.current?.files[0] || multipleImagesRef.current?.files[3],
   };
 
   const formik = useFormik({
@@ -92,7 +97,7 @@ const NewTrip = () => {
         arr.push(url);
       }
       const { url } = await uploadCloudinary(formik.values.imageCover);
-      console.log(arr);
+
       const data = {
         title: formik.values.title,
         descOne: formik.values.descOne,
@@ -175,11 +180,16 @@ const NewTrip = () => {
     formik.setFieldValue(field, e.target.files[0]);
   };
   const pickMultipleImages = (e) => {
-    e.target.files[0] && formik.setFieldValue("imageOne", e.target.files[0]);
-    e.target.files[1] && formik.setFieldValue("imageTwo", e.target.files[1]);
-    e.target.files[2] && formik.setFieldValue("imageThree", e.target.files[2]);
-    e.target.files[3] && formik.setFieldValue("imageFour", e.target.files[3]);
+    multipleImagesRef.current?.files[0] &&
+      formik.setFieldValue("imageOne", multipleImagesRef.current?.files[0]);
+    multipleImagesRef.current?.files[1] &&
+      formik.setFieldValue("imageTwo", multipleImagesRef.current?.files[1]);
+    multipleImagesRef.current?.files[2] &&
+      formik.setFieldValue("imageThree", multipleImagesRef.current?.files[2]);
+    multipleImagesRef.current?.files[3] &&
+      formik.setFieldValue("imageFour", multipleImagesRef.current?.files[3]);
   };
+
   return (
     <>
       <form className="w-96  md:w-auto bg-white rounded-xl py-6 px-12 mt-20 shadow-2xl text-gray-500 flex flex-col gap-2">
@@ -560,6 +570,7 @@ const NewTrip = () => {
             type="file"
             multiple="multiple"
             className="hidden"
+            ref={multipleImagesRef}
             id="images"
           ></input>
         </div>
@@ -592,7 +603,7 @@ const NewTrip = () => {
             : uploadError
             ? uploadError
             : error
-            ? error
+            ? error.response.data.error.message
             : ""}
         </span>
       </form>

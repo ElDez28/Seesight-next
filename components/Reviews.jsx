@@ -80,16 +80,10 @@ function Reviews(props) {
         swipeable
       >
         {props.reviews.map((review, i) => {
-          let source;
-          if (review.user[0].image.includes("https")) {
-            source = review.user[0].image;
-          } else {
-            source = `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${review.user[0].image}`;
-          }
           return (
             <Review
               key={i}
-              image={source}
+              image={`${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/users/${review.user[0].image}`}
               text={review.text}
               username={review.user[0].username}
               rating={review.rating}

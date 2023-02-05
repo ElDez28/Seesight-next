@@ -19,12 +19,6 @@ function WishItem(props) {
     } catch (err) {}
   };
 
-  let source;
-  if (props.image.includes("https")) {
-    source = props.image;
-  } else {
-    source = `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`;
-  }
   return (
     <>
       <div className="bg-white max-w-6xl  flex  gap-12  mx-auto  p-12 shadow-xl mb-12">
@@ -32,7 +26,7 @@ function WishItem(props) {
           <div className="item flex flex-col items-center justify-between">
             <Image
               className="object-cover h-full pb-4"
-              src={source}
+              src={props.image}
               width={600}
               height={600}
               alt=""

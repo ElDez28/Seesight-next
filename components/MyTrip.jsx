@@ -47,18 +47,13 @@ function MyTrip(props) {
       }
     }
   };
-  let source;
-  if (props.image.includes("https")) {
-    source = props.image;
-  } else {
-    source = `${process.env.NEXT_PUBLIC_BACKEND_SHORT}/images/cities/${props.image}`;
-  }
+
   return (
     <div className="bg-white max-w-6xl  flex flex-col gap-12  mx-auto  p-12 shadow-xl ">
       <form>
         <div className="flex flex-col md:flex-row gap-12 text-gray-500 font-medium font-rest mb-8">
           <div className="item">
-            <Image src={source} alt="" height={700} width={700}></Image>
+            <Image src={props.image} alt="" height={700} width={700}></Image>
           </div>
           <div className="item flex flex-col items-center justify-center gap-12">
             <div>
