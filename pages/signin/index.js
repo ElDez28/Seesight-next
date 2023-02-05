@@ -15,8 +15,8 @@ import logo from "../../public/images/logo2.png";
 import vector from "../../public/images/vector2.png";
 
 function SignIn() {
+  const { error, isLoading, sendRequest, clearError } = useHttp();
   const router = useRouter();
-  const { sendRequest, error, isLoading, clearError } = useHttp();
   const { register } = useSelector((state) => state.register);
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState("Choose your image");
@@ -57,9 +57,7 @@ function SignIn() {
       Cookie.set("userId", res.data.user._id);
 
       router.replace("/");
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const signupFormSubmit = async (values) => {
     const formData = new FormData();
@@ -83,10 +81,9 @@ function SignIn() {
       Cookie.set("expDate", Date.now() + 24 * 60 * 60 * 1000);
 
       router.replace("/");
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
+
   const formikOne = useFormik({
     enableReinitialize: true,
     validateOnChange: false,
@@ -124,7 +121,7 @@ function SignIn() {
       <div className="max-w-5xl bg-[#f6f5f5] flex p-10 text-gray-600 gap-10 shadow-xl flex-col lg:flex-row ">
         <div className="flex flex-col gap-4 w-full  justify-center">
           <div className="flex gap-2 items-center justify-left">
-            <Image className="w-8 h-8" src={logo}></Image>
+            <Image className="w-8 h-8" src={logo} alt=""></Image>
             <span className="font-logo text-orange-400">Seesight Travel</span>
           </div>
           <h3>
@@ -132,7 +129,7 @@ function SignIn() {
             especially luxurious trips are sure to fit the bill.
           </h3>
           <div className="">
-            <Image className="w-full" src={vector}></Image>
+            <Image className="w-full" src={vector} alt=""></Image>
           </div>
         </div>
         <div className="bg-white w-full px-4 py-6 flex flex-col justify-between gap-12 mx-auto shadow-xl  ">
@@ -147,6 +144,7 @@ function SignIn() {
             >
               Login
             </span>
+
             <span
               onClick={() => dispatch(registerActions.setRegisterToTrue())}
               className={` cursor-pointer px-4 py-2 text-sm rounded-3xl ${
@@ -236,6 +234,11 @@ function SignIn() {
                     "Login"
                   )}
                 </button>
+              )}
+              {error && (
+                <span className="w-full text-red-400 font-bold text-center">
+                  {error.response.data.message}!
+                </span>
               )}
             </form>
           )}
