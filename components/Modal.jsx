@@ -97,7 +97,7 @@ export default function BasicModal(props) {
         className="bg-black bg-opacity-60"
       >
         <Box sx={style} className="font-rest max-w-6xl px-20 py-6">
-          <div className="flex justify-between w-full gap-4 items-center bg-white py-4 px-4">
+          <div className="flex justify-between w-full gap-4 items-center bg-white py-4 px-4 flex-col lg:flex-row">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack className="" spacing={3}>
                 <DesktopDatePicker
@@ -133,8 +133,9 @@ export default function BasicModal(props) {
           <h2 className="text-gray-400 font-bold text-2xl text-center mb-4">
             Your reservation
           </h2>
-          <div className="flex justify-between gap-8 text-center">
-            <div className="flex flex-col text-gray-400 mb-6">
+
+          <div className="flex justify-between gap-8 text-center flex-col lg:flex-row mb-6">
+            <div className="flex flex-col text-gray-400">
               <span className="font-bold">Location</span>
               <span>{props.location.title}</span>
             </div>
@@ -151,7 +152,8 @@ export default function BasicModal(props) {
               <span>{price}$</span>
             </div>
           </div>
-          <div className="flex justify-center gap-2 text-gray-400 mb-4">
+
+          <div className="flex justify-center gap-2 text-gray-400 mb-4 flex-col lg:flex-row">
             <button
               onClick={handleClose}
               className="text-center item bg-red-400 text-white py-2"
