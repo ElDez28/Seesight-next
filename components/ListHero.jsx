@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "@/store/store";
-import voz from "../public/images/voz.png";
+import voz from "../public/images/voz.jpg";
 import Image from "next/image";
 function ListHero(props) {
   const dispatch = useDispatch();
