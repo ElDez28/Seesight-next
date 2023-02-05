@@ -35,7 +35,7 @@ function Hero(props) {
             priority
           ></Image>
         </div>
-        <div className="absolute bg-black opacity-60  w-full h-full  "></div>
+        <div className="absolute bg-black opacity-60  w-full h-[120%] bottom-0  "></div>
         <div className="bg-black py-16 px-10  rounded-2xl font-rest z-10 flex-col text-white text-center max-w-3xl">
           <h1 className="text-white text-5xl  font-bold mb-6">
             Most beautifle locations in Bosnia
