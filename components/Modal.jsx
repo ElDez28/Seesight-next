@@ -87,6 +87,7 @@ export default function BasicModal(props) {
       setPrice(0);
     }
   }, [order.secondDate, order.firstDate]);
+
   return (
     <div>
       <Modal
@@ -165,11 +166,16 @@ export default function BasicModal(props) {
             </button>
             <button
               onClick={createReservation}
-              className="text-center item bg-green-500 text-white py-2"
+              className="text-center item bg-green-500 text-white py-2 flex items-center justify-center"
             >
-              {isLoading ? <span class="loader"></span> : "Proceed to checkout"}
+              {isLoading ? <span class="loader"></span> : "Make a reservation"}
             </button>
           </div>
+          {success && (
+            <span className="font-bold text-green-500 flex items-center justify-center w-full">
+              You successfully made a reservation!
+            </span>
+          )}
         </Box>
       </Modal>
     </div>
