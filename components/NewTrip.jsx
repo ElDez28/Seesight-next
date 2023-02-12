@@ -174,7 +174,7 @@ const NewTrip = () => {
     multipleImagesRef.current?.files[3] &&
       formik.setFieldValue("imageFour", multipleImagesRef.current?.files[3]);
   };
-  console.log(formik.errors);
+
   return (
     <>
       <form
@@ -389,7 +389,7 @@ const NewTrip = () => {
                 </div>
                 <div className="absolute  w-full bg-gradient-to-b from-transparent to-gray-400 top-0 opacity-0 h-full group-hover:opacity-100 transition-all duration-300 flex items-end justify-center">
                   <span className="pb-4 text-white">
-                    {formik.values.imageCover === ""
+                    {!formik.values.imageCover
                       ? "Add cover image"
                       : "Replace cover image"}{" "}
                     <PhotoSizeSelectActualIcon></PhotoSizeSelectActualIcon>

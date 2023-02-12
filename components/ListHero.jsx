@@ -54,9 +54,9 @@ function ListHero(props) {
           <span>ENJOY AND DISCOVER</span>
         </div>
       </div>
-      <div className="flex justify-center flex-col max-w-3xl mx-auto -mt-24">
+      <div className="flex justify-center flex-col max-w-3xl mx-auto -translate-y-28 ">
         <div className="w-full flex flex-col gap-4 mx-auto items-center bg-[#2b2d42] px-8 py-8 ">
-          <h2 className="text-white font-semibold">FIND CITIES</h2>
+          <h2 className="text-white font-semibold text-lg">FIND CITIES</h2>
           {searchBy === "city" && (
             <input
               onChange={(e) => {
@@ -78,7 +78,7 @@ function ListHero(props) {
               }}
               placeholder="Enter city name"
               type="search"
-              className="text-sm focus:outline-none px-4 py-2 border-none w-full"
+              className=" focus:outline-none px-4 py-2 cursor-pointer border-none w-full text-lg"
             ></input>
           )}
           {searchBy === "price" && (
@@ -88,7 +88,7 @@ function ListHero(props) {
                   setFrom(e.target.value);
                 }}
                 id="from"
-                className="bg-gray-50 py-2 border focus:outline-none border-none text-gray-900 text-sm  focus:ring-blue-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50  border focus:outline-none cursor-pointer border-none text-gray-900   focus:ring-blue-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option className="text-lg " defaultValue={0}>
                   From
@@ -128,7 +128,7 @@ function ListHero(props) {
               <select
                 onChange={(e) => setTo(e.target.value)}
                 id="to"
-                className="bg-gray-50 py-2 border focus:outline-none border-none text-gray-900 text-sm  focus:ring-blue-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border cursor-pointer focus:outline-none border-none text-gray-900 text-lg  focus:ring-blue-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option className="text-lg " defaultValue={0}>
                   To
@@ -173,7 +173,7 @@ function ListHero(props) {
               setTo(1000);
             }}
             id="locations"
-            className="bg-gray-50 py-2 border focus:outline-none border-none text-gray-900 text-sm  focus:ring-blue-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 py-2 border focus:outline-none cursor-pointer text-lg border-none text-gray-900   focus:ring-blue-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option className="text-lg " value="city">
               Search by city

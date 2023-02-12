@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import { useHttp } from "@/hooks/useHttp";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "@/store/store";
+
 const MyProfile = (props) => {
   const dispatch = useDispatch();
+
   const { isLoading, error, sendRequest, clearError } = useHttp();
   const { wishlist } = useSelector((state) => state.user);
 

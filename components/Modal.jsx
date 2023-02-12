@@ -167,14 +167,9 @@ export default function BasicModal(props) {
               onClick={createReservation}
               className="text-center item bg-green-500 text-white py-2"
             >
-              {isLoading ? <span class="loader"></span> : "Confirm reservation"}
+              {isLoading ? <span class="loader"></span> : "Proceed to checkout"}
             </button>
           </div>
-          {success && (
-            <span className="font-bold text-green-500 text-xl block text-center">
-              Your made a reservation successfully!
-            </span>
-          )}
         </Box>
       </Modal>
     </div>
