@@ -57,7 +57,12 @@ function MyTrip(props) {
           </div>
           <div className="item flex flex-col items-center justify-center gap-12">
             <div>
-              <h2 className="text-2xl text-green-600">{props.title}</h2>
+              <h2
+                className="text-2xl text-gray-400
+               font-bold"
+              >
+                {props.title}
+              </h2>
             </div>
             <div className="flex gap-12 border-b-2 py-4 flex-col md:flex-row">
               <div className="flex gap-12 items-center justify-center text-center">

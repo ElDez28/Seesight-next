@@ -18,6 +18,7 @@ function MyTrips(props) {
             <MyTrip
               key={item._id}
               id={item.trip._id}
+              title={item.trip.title}
               startingDate={item.startingDate}
               endingDate={item.endingDate}
               price={item.price}
